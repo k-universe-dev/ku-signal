@@ -7,11 +7,17 @@ import { WebSocketServer, WebSocket } from "ws";
 import { CommandSchema } from "../protocol/commands.js";
 import { createAgentCore } from "../core/agent.js";
 import type { AgentEvent } from "../protocol/events.js";
+import type { ModelProvider } from "../core/models.js";
+import type { ByteTool } from "../tools/index.js";
 
 export interface SocketAdapterOptions {
   port?: number;
   host?: string;
   path?: string;
+  provider?: ModelProvider;
+  model?: string;
+  tools?: ByteTool[];
+  systemPrompt?: string;
 }
 
 export interface SocketAdapter {
@@ -27,6 +33,10 @@ export function createSocketAdapter(options: SocketAdapterOptions = {}): SocketA
 
   wss.on("connection", (ws: WebSocket) => {
     const agent = createAgentCore({
+      provider: options.provider,
+      model: options.model,
+      tools: options.tools,
+      systemPrompt: options.systemPrompt,
       onEvent: (event) => {
         if (ws.readyState === WebSocket.OPEN) {
           ws.send(JSON.stringify(event));
@@ -39,7 +49,7 @@ export function createSocketAdapter(options: SocketAdapterOptions = {}): SocketA
       try {
         raw = JSON.parse(data.toString());
       } catch {
-        const errEvent: AgentEvent = {
+        const errEvent = {
           type: "JobComplete",
           jobId: "parse-error",
           sessionId: "unknown",
@@ -47,13 +57,13 @@ export function createSocketAdapter(options: SocketAdapterOptions = {}): SocketA
           error: "Invalid JSON",
           timestamp: new Date().toISOString(),
         };
-        ws.send(JSON.stringify(errEvent));
+        if (ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(errEvent));
         return;
       }
 
       const parsed = CommandSchema.safeParse(raw);
       if (!parsed.success) {
-        const errEvent: AgentEvent = {
+        const errEvent = {
           type: "JobComplete",
           jobId: "validation-error",
           sessionId: "unknown",
@@ -61,14 +71,19 @@ export function createSocketAdapter(options: SocketAdapterOptions = {}): SocketA
           error: parsed.error.message,
           timestamp: new Date().toISOString(),
         };
-        ws.send(JSON.stringify(errEvent));
+        if (ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(errEvent));
         return;
       }
 
       try {
-        await agent.executeCommand(parsed.data);
+        const stream = await agent.executeCommand(parsed.data);
+        for await (const event of stream) {
+          if (ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify(event));
+          }
+        }
       } catch (err) {
-        const errEvent: AgentEvent = {
+        const errEvent = {
           type: "JobComplete",
           jobId: "runtime-error",
           sessionId: "unknown",
@@ -76,7 +91,7 @@ export function createSocketAdapter(options: SocketAdapterOptions = {}): SocketA
           error: err instanceof Error ? err.message : String(err),
           timestamp: new Date().toISOString(),
         };
-        ws.send(JSON.stringify(errEvent));
+        if (ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(errEvent));
       }
     });
 
