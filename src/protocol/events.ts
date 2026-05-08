@@ -60,6 +60,18 @@ export const JobCompleteEventSchema = z.object({
 
 export type JobCompleteEvent = z.infer<typeof JobCompleteEventSchema>;
 
+// --- TokenChunkEvent ---
+
+export const TokenChunkEventSchema = z.object({
+  type: z.literal("TokenChunk"),
+  jobId: z.string(),
+  sessionId: z.string(),
+  chunk: z.string(),
+  timestamp: z.string().datetime(),
+});
+
+export type TokenChunkEvent = z.infer<typeof TokenChunkEventSchema>;
+
 // --- Discriminated Union ---
 
 export const AgentEventSchema = z.discriminatedUnion("type", [
@@ -68,6 +80,7 @@ export const AgentEventSchema = z.discriminatedUnion("type", [
   SessionDestroyedSchema,
   JobStartedSchema,
   JobCompleteEventSchema,
+  TokenChunkEventSchema,
 ]);
 
 export type AgentEvent = z.infer<typeof AgentEventSchema>;
