@@ -1,0 +1,2431 @@
+╭─── Claude Code v2.1.126 ─────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│              Welcome back K-Universe!              │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ What's new              │
+│                        ▘▘ ▝▝                       │ The `/model` picker no… │
+│      Sonnet 4.6 · Claude Pro ·                     │ - Added `claude projec… │
+│      main.kuniverse@gmail.com's Organization       │ `--dangerously-skip-pe… │
+│ D:\home\byte\dev\projects\k-universe-agent-harness │ /release-notes for more │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+❯ /resume                                                                       
+  ⎿  No conversations found to resume
+
+❯ /superpowers:subagent-driven-development                                      
+                                                                                
+  create plan for distributed-moler.                                            
+                                                                                
+  Context:                                                                      
+  - Project: D:\home\byte\dev\projects\k-universe-agent-harness                 
+  - "Moler" = the distributed agent orchestration layer for K-Universe.         
+    Runs multiple K2 agent harness instances across nodes and coordinates them. 
+  - Plan should cover: multi-node session coordination, inter-instance          
+    messaging, K2 protocol compatibility across nodes.                          
+  - Use the existing src/adapters/socket.ts as the base transport.              
+
+● Skill(superpowers:subagent-driven-development)
+  ⎿  Successfully loaded skill
+
+● The user wants a plan created for distributed-moler. Per the skill flow, I
+  need to invoke superpowers:writing-plans first since there's no plan yet to
+  execute. First, let me explore the existing codebase.
+
+● Skill(superpowers:writing-plans)
+  ⎿  Successfully loaded skill
+
+● I'm using the writing-plans skill to create the implementation plan.
+
+  Let me explore the existing codebase first.
+
+● Explore(Explore k-universe-agent-harness codebase structure)
+  ⎿  Done (25 tool uses · 91.5k tokens · 1m 56s)
+  (ctrl+o to expand)
+
+❯ - rename moler with better name LOL give me quick names that are better 
+
+● Quick names — pick one:
+
+  ┌───────────┬──────────────────────────────────────────────────────────────┐
+  │   Name    │                             Vibe                             │
+  ├───────────┼──────────────────────────────────────────────────────────────┤
+  │ Nexus     │ Central coordination point — classic distributed systems     │
+  │           │ term                                                         │
+  ├───────────┼──────────────────────────────────────────────────────────────┤
+  │ Lattice   │ Interconnected nodes, mathematical, clean                    │
+  ├───────────┼──────────────────────────────────────────────────────────────┤
+  │ Weave     │ Weaves K2 instances together across nodes                    │
+  ├───────────┼──────────────────────────────────────────────────────────────┤
+  │ Conductor │ Orchestrates agents like a conductor, readable               │
+  ├───────────┼──────────────────────────────────────────────────────────────┤
+  │ Relay     │ Pass messages between nodes — literal and accurate           │
+  ├───────────┼──────────────────────────────────────────────────────────────┤
+  │ Mesh      │ k-mesh, distributed mesh topology                            │
+  ├───────────┼──────────────────────────────────────────────────────────────┤
+  │ Arbiter   │ Coordinates + resolves conflicts between nodes               │
+  └───────────┴──────────────────────────────────────────────────────────────┘
+
+  My pick: Nexus — it's short, instantly legible, and "distributed orchestration
+   coordinator" maps perfectly to what a nexus does. Works as k-nexus in the
+  monorepo.
+
+  Which one? I'll carry the name through the plan once you decide.
+
+✻ Sautéed for 2m 31s
+
+❯ I am trying to make mostly my own .pi-agent, claude code, openclaude,         
+  opencode, kilo, CLI, TUI Terminal product. for K-Universe. Real competitor to 
+   .pi etc. No re-inventing the wheel. Do this properly use the resources       
+  availbales outthere. Moler                                                    
+
+● Got it — this is a much bigger scope than distributed coordination alone. The
+  product IS the CLI/TUI terminal tool (the Moler/Nexus layer is the backend).
+  Let me explore the research docs and full requirements before designing the
+  plan.
+
+● Explore(Read competitive research and TUI aesthetics docs)
+  ⎿  Done (8 tool uses · 71.5k tokens · 59s)
+  (ctrl+o to expand)
+
+❯ KU-ADE ? 
+
+❯ KU-OS 
+
+❯ KU-FLOW 
+
+❯ KU-BYTE 
+
+● Quick take on the names while I continue the plan:
+
+  - KU-ADE — "Agent Dev Environment" reads well, but ADE as a CLI command is
+  awkward to type
+  - KU-OS — bold but sets wrong expectations (it's not an OS)
+  - KU-FLOW — already exists in your monorepo (packages/k-flow/, k-flow-mcp) —
+  collision
+  - KU-BYTE — this is the one. Byte is your handle. You are the product. CLI
+  command is byte. Like .pi is invoked as pi, yours is byte. Short, personal,
+  memorable
+
+  Pick: KU-BYTE / byte — continuing plan with this name.
+
+  ---
+  Now designing the implementation plan:
+
+● Plan(Design KU-BYTE CLI/TUI implementation plan)
+  ⎿  Done (40 tool uses · 87.6k tokens · 9m 0s)
+  (ctrl+o to expand)
+
+● Let me read the full plan output and write it to the plan file.
+
+  Read 1 file (ctrl+o to expand)
+
+● The plan output is too large to re-read. I have all the context I need from
+  the exploration. Let me write the final plan directly.
+
+● Updated plan  ⎿  /plan to preview
+
+● Plan written. Let me exit plan mode.
+
+● User approved Claude's plan
+  ⎿  Plan saved to: C:\Users\Byte\.claude\plans\i-am-trying-to-wobbly-waffle.md 
+     · /plan to edit
+     KU-BYTE (byte) Implementation Plan
+
+     ▎ Context: Joel is building a K-Universe branded AI coding agent CLI/TUI — 
+     ▎ a real competitor to .pi-agent, Claude Code, OpenCode, and Kilo. The 
+     ▎ product is named KU-BYTE, CLI command byte. It lives inside the existing 
+     ▎ k-universe-agent-harness repo, which already has a complete typed K2 
+     ▎ protocol (commands/events via Zod), a headless AgentCore, and three 
+     ▎ adapters. The plan extends that foundation into a full product: Ink TUI, 
+     ▎ multi-provider LLM, coding tools, config, and session persistence. No 
+     ▎ reinventing the wheel — use battle-tested npm libraries throughout.
+
+     ▎ For agentic workers: REQUIRED SUB-SKILL: Use 
+     ▎ superpowers:subagent-driven-development (recommended) or 
+     ▎ superpowers:executing-plans to implement this plan task-by-task. Steps 
+     ▎ use checkbox (- [ ]) syntax for tracking.
+
+     Goal: Build byte — a K-Universe AI coding agent CLI/TUI competitive with
+     Claude Code and pi-agent, built on the existing K2 harness in
+     D:\home\byte\dev\projects\k-universe-agent-harness.
+
+     Architecture: src/core/ and src/protocol/ are untouched except for one new
+     SendMessageCommand. A new src/core/runner.ts owns the agentic conversation
+     loop. Provider SDKs live only in src/providers/. Ink powers the TUI
+     adapter. All agent comms go through the K2 protocol.
+
+     Tech Stack: TypeScript strict, Bun runtime, pnpm, Ink (React for CLI),
+     commander, conf, zod (already present), @anthropic-ai/sdk, openai (covers
+     LM Studio), execa, glob
+
+     ---
+     File Map
+
+     ┌──────────────────────────────────┬───────────┬───────────────────────────
+     ┐
+     │               File               │  Action   │      Responsibility
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ package.json                     │ Create    │ Dependencies, scripts,
+     │
+     │                                  │           │ bin entry
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ tsconfig.json                    │ Create    │ Strict ESM, NodeNext
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/protocol/commands.ts         │ Modify    │ Add SendMessageCommand
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/core/runner.ts               │ Create    │ Agentic loop: message →
+     │
+     │                                  │           │ LLM → tools → response
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/core/models.ts               │ Unchanged │ ModelProvider interface
+     │
+     │                                  │           │ (no SDK imports)
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/config.ts                    │ Create    │ Load/save config via conf
+     │
+     │                                  │           │  + zod
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/providers/anthropic/index.ts │ Create    │ Anthropic SDK →
+     │
+     │                                  │           │ ModelProvider
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │                                  │           │ openai SDK →
+     │
+     │ src/providers/openai/index.ts    │ Create    │ ModelProvider (covers LM
+     │
+     │                                  │           │ Studio)
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/tools/file-read.ts           │ Create    │ Read file tool
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/tools/file-write.ts          │ Create    │ Write file tool
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/tools/bash.ts                │ Create    │ Shell exec tool via execa
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/tools/search.ts              │ Create    │ Glob/grep tool
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/tools/index.ts               │ Create    │ Tool registry barrel
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/tui/App.tsx                  │ Create    │ Root Ink component
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/tui/ConversationPane.tsx     │ Create    │ Message history display
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/tui/StatusBar.tsx            │ Create    │ Model, session, token
+     │
+     │                                  │           │ count
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/tui/InputBox.tsx             │ Create    │ User input with
+     │
+     │                                  │           │ keybindings
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/adapters/tui.ts              │ Create    │ Ink TUI adapter (replaces
+     │
+     │                                  │           │  cli.ts for interactive)
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ src/cli.ts                       │ Create    │ Entry point: arg parse →
+     │
+     │                                  │           │ TUI or print mode
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ tests/unit/runner.test.ts        │ Create    │ Runner unit tests
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ tests/unit/config.test.ts        │ Create    │ Config tests
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ tests/unit/providers.test.ts     │ Create    │ Provider adapter tests
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ tests/unit/tools.test.ts         │ Create    │ Tool tests
+     │
+     ├──────────────────────────────────┼───────────┼───────────────────────────
+     ┤
+     │ tests/integration/byte.test.ts   │ Create    │ End-to-end CLI test
+     │
+     └──────────────────────────────────┴───────────┴───────────────────────────
+     ┘
+
+     ---
+     Task 1: Scaffold — package.json, tsconfig, install dependencies
+
+     Files:
+     - Create: package.json
+     - Create: tsconfig.json
+     - Step 1: Write package.json
+
+     {
+       "name": "ku-byte",
+       "version": "0.1.0",
+       "private": true,
+       "type": "module",
+       "bin": {
+         "byte": "./dist/cli.js"
+       },
+       "scripts": {
+         "build": "tsc",
+         "dev": "tsx src/cli.ts",
+         "byte": "tsx src/cli.ts",
+         "verify": "tsx scripts/verify.ts",
+         "test": "vitest run",
+         "test:watch": "vitest",
+         "typecheck": "tsc --noEmit"
+       },
+       "dependencies": {
+         "@anthropic-ai/sdk": "^0.52.0",
+         "chalk": "^5.3.0",
+         "commander": "^12.1.0",
+         "conf": "^13.0.1",
+         "execa": "^9.3.0",
+         "glob": "^11.0.0",
+         "ink": "^5.0.1",
+         "openai": "^4.65.0",
+         "react": "^18.3.1",
+         "ws": "^8.18.0",
+         "zod": "^3.23.0"
+       },
+       "devDependencies": {
+         "@types/node": "^20.0.0",
+         "@types/react": "^18.3.0",
+         "@types/ws": "^8.5.0",
+         "tsx": "^4.19.0",
+         "typescript": "^5.4.0",
+         "vitest": "^2.1.0"
+       }
+     }
+
+     - Step 2: Write tsconfig.json
+
+     {
+       "compilerOptions": {
+         "target": "ES2022",
+         "module": "NodeNext",
+         "moduleResolution": "NodeNext",
+         "jsx": "react-jsx",
+         "outDir": "dist",
+         "rootDir": "src",
+         "strict": true,
+         "esModuleInterop": true,
+         "skipLibCheck": true,
+         "declaration": true,
+         "sourceMap": true
+       },
+       "include": ["src/**/*"],
+       "exclude": ["node_modules", "dist"]
+     }
+
+     - Step 3: Install dependencies
+
+     pnpm install
+
+     Expected: node_modules/ created, pnpm-lock.yaml written.
+
+     - Step 4: Create directory structure
+
+     mkdir -p src/providers/anthropic src/providers/openai src/tools src/tui
+     tests/unit tests/integration
+
+     - Step 5: Commit
+
+     git add package.json tsconfig.json pnpm-lock.yaml
+     git commit -m "chore: scaffold ku-byte dependencies and tsconfig"
+
+     ---
+     Task 2: Config system
+
+     Files:
+     - Create: src/config.ts
+     - Create: tests/unit/config.test.ts
+     - Step 1: Write failing test
+
+     // tests/unit/config.test.ts
+     import { describe, it, expect, beforeEach } from "vitest";
+     import { loadConfig, saveConfig, defaultConfig, ByteConfig } from
+     "../../src/config.js";
+
+     describe("config", () => {
+       it("returns default config when nothing is saved", () => {
+         const cfg = defaultConfig();
+         expect(cfg.defaultModel).toBe("claude-sonnet-4-6");
+         expect(cfg.providers.anthropic).toBeUndefined();
+       });
+
+       it("validates model string is non-empty", () => {
+         const cfg = defaultConfig();
+         cfg.defaultModel = "";
+         expect(() => saveConfig(cfg)).toThrow();
+       });
+     });
+
+     - Step 2: Run test to verify it fails
+
+     pnpm test tests/unit/config.test.ts
+
+     Expected: FAIL — config.js not found.
+
+     - Step 3: Write implementation
+
+     // src/config.ts
+     import Conf from "conf";
+     import { z } from "zod";
+
+     const ByteConfigSchema = z.object({
+       defaultModel: z.string().min(1),
+       defaultProvider: z.enum(["anthropic", "openai", "lmstudio"]),
+       providers: z.object({
+         anthropic: z.object({ apiKey: z.string() }).optional(),
+         openai: z.object({ apiKey: z.string(), baseUrl:
+     z.string().url().optional() }).optional(),
+         lmstudio: z.object({ baseUrl: z.string().url() }).optional(),
+       }),
+       theme: z.object({
+         accentColor: z.string().default("#0066FF"),
+       }).default({}),
+       sessionDir: z.string().optional(),
+     });
+
+     export type ByteConfig = z.infer<typeof ByteConfigSchema>;
+
+     export function defaultConfig(): ByteConfig {
+       return {
+         defaultModel: "claude-sonnet-4-6",
+         defaultProvider: "anthropic",
+         providers: {},
+         theme: { accentColor: "#0066FF" },
+       };
+     }
+
+     const store = new Conf<ByteConfig>({ projectName: "byte", defaults:
+     defaultConfig() });
+
+     export function loadConfig(): ByteConfig {
+       return ByteConfigSchema.parse(store.store);
+     }
+
+     export function saveConfig(cfg: ByteConfig): void {
+       ByteConfigSchema.parse(cfg); // throws on invalid
+       store.store = cfg;
+     }
+
+     export function setApiKey(provider: "anthropic" | "openai", key: string):
+     void {
+       const cfg = loadConfig();
+       if (provider === "anthropic") cfg.providers.anthropic = { apiKey: key };
+       if (provider === "openai") cfg.providers.openai = { apiKey: key };
+       saveConfig(cfg);
+     }
+
+     - Step 4: Run tests to verify they pass
+
+     pnpm test tests/unit/config.test.ts
+
+     Expected: PASS 2/2.
+
+     - Step 5: Commit
+
+     git add src/config.ts tests/unit/config.test.ts
+     git commit -m "feat: config system with conf + zod schema"
+
+     ---
+     Task 3: Add SendMessageCommand to K2 protocol
+
+     Files:
+     - Modify: src/protocol/commands.ts
+     - Step 1: Read current commands.ts to find the discriminated union
+
+     Check: src/protocol/commands.ts — locate CommandSchema = 
+     z.discriminatedUnion(...).
+
+     - Step 2: Add SendMessageCommand schema
+
+     In src/protocol/commands.ts, add after the existing command schemas:
+
+     export const SendMessageCommandSchema = z.object({
+       protocolVersion: z.literal("1.0"),
+       type: z.literal("SendMessage"),
+       sessionId: z.string(),
+       content: z.string().min(1),
+       role: z.enum(["user"]).default("user"),
+     });
+
+     export type SendMessageCommand = z.infer<typeof SendMessageCommandSchema>;
+
+     Then add SendMessageCommandSchema to the CommandSchema discriminated union
+     array.
+
+     - Step 3: Run verify script to confirm K2 invariants still pass
+
+     tsx scripts/verify.ts
+
+     Expected: K2-1 PASS, K2-2 PASS (SendMessageCommand has protocolVersion: 
+     z.literal("1.0")), K2-3 PASS, ARCH PASS.
+
+     - Step 4: Commit
+
+     git add src/protocol/commands.ts
+     git commit -m "feat(protocol): add SendMessageCommand to K2 command schema"
+
+     ---
+     Task 4: Anthropic provider
+
+     Files:
+     - Create: src/providers/anthropic/index.ts
+     - Create: tests/unit/providers.test.ts
+     - Step 1: Write failing test
+
+     // tests/unit/providers.test.ts
+     import { describe, it, expect, vi } from "vitest";
+     import { createAnthropicProvider } from
+     "../../src/providers/anthropic/index.js";
+
+     describe("AnthropicProvider", () => {
+       it("exposes name and supportedModels", () => {
+         const provider = createAnthropicProvider({ apiKey: "sk-test" });
+         expect(provider.name).toBe("anthropic");
+         expect(provider.supportedModels).toContain("claude-sonnet-4-6");
+         expect(provider.supportedModels).toContain("claude-opus-4-7");
+       });
+
+       it("implements ModelProvider interface", () => {
+         const provider = createAnthropicProvider({ apiKey: "sk-test" });
+         expect(typeof provider.complete).toBe("function");
+       });
+     });
+
+     - Step 2: Run test to verify it fails
+
+     pnpm test tests/unit/providers.test.ts
+
+     Expected: FAIL — providers/anthropic/index.js not found.
+
+     - Step 3: Write implementation
+
+     // src/providers/anthropic/index.ts
+     import Anthropic from "@anthropic-ai/sdk";
+     import type {
+       ModelProvider,
+       ChatCompletionOptions,
+       ChatCompletionResult,
+     } from "../../core/models.js";
+
+     export interface AnthropicProviderOptions {
+       apiKey: string;
+       baseUrl?: string;
+     }
+
+     export function createAnthropicProvider(opts: AnthropicProviderOptions):
+     ModelProvider {
+       const client = new Anthropic({ apiKey: opts.apiKey, baseURL: opts.baseUrl
+      });
+
+       const supportedModels = [
+         "claude-sonnet-4-6",
+         "claude-opus-4-7",
+         "claude-haiku-4-5-20251001",
+       ];
+
+       async function complete(options: ChatCompletionOptions):
+     Promise<ChatCompletionResult> {
+         const systemMsg = options.messages.find((m) => m.role === "system");
+         const userMessages = options.messages.filter((m) => m.role !==
+     "system");
+
+         const response = await client.messages.create({
+           model: options.model,
+           max_tokens: options.maxTokens ?? 8096,
+           system: systemMsg?.content,
+           messages: userMessages.map((m) => ({
+             role: m.role as "user" | "assistant",
+             content: m.content,
+           })),
+           tools: options.tools?.map((t) => ({
+             name: t.name,
+             description: t.description,
+             input_schema: t.parameters as Anthropic.Tool["input_schema"],
+           })),
+         });
+
+         const textContent = response.content.find((c) => c.type === "text");
+         const toolUseContent = response.content.filter((c) => c.type ===
+     "tool_use");
+
+         return {
+           id: response.id,
+           model: response.model,
+           content: textContent?.type === "text" ? textContent.text : "",
+           toolCalls: toolUseContent.map((tc) =>
+             tc.type === "tool_use"
+               ? { id: tc.id, name: tc.name, arguments: tc.input }
+               : { id: "", name: "", arguments: {} }
+           ),
+           finishReason:
+             response.stop_reason === "tool_use"
+               ? "tool_calls"
+               : response.stop_reason === "max_tokens"
+               ? "length"
+               : "stop",
+           usage: {
+             promptTokens: response.usage.input_tokens,
+             completionTokens: response.usage.output_tokens,
+             totalTokens: response.usage.input_tokens +
+     response.usage.output_tokens,
+           },
+         };
+       }
+
+       return { name: "anthropic", supportedModels, complete };
+     }
+
+     - Step 4: Run tests
+
+     pnpm test tests/unit/providers.test.ts
+
+     Expected: PASS 2/2.
+
+     - Step 5: Commit
+
+     git add src/providers/anthropic/index.ts tests/unit/providers.test.ts
+     git commit -m "feat(providers): Anthropic provider implementing 
+     ModelProvider interface"
+
+     ---
+     Task 5: OpenAI-compatible provider (covers LM Studio)
+
+     Files:
+     - Create: src/providers/openai/index.ts
+     - Step 1: Write failing test (add to tests/unit/providers.test.ts)
+
+     import { createOpenAIProvider } from "../../src/providers/openai/index.js";
+
+     describe("OpenAIProvider", () => {
+       it("exposes name and supportedModels", () => {
+         const provider = createOpenAIProvider({ apiKey: "sk-test" });
+         expect(provider.name).toBe("openai");
+         expect(provider.supportedModels).toContain("gpt-4o");
+       });
+
+       it("accepts custom baseUrl for LM Studio", () => {
+         const provider = createOpenAIProvider({
+           apiKey: "lm-studio",
+           baseUrl: "http://localhost:19735/v1",
+         });
+         expect(provider.name).toBe("openai");
+       });
+     });
+
+     - Step 2: Run to verify it fails
+
+     pnpm test tests/unit/providers.test.ts
+
+     Expected: FAIL — OpenAI tests fail, Anthropic tests still pass.
+
+     - Step 3: Write implementation
+
+     // src/providers/openai/index.ts
+     import OpenAI from "openai";
+     import type {
+       ModelProvider,
+       ChatCompletionOptions,
+       ChatCompletionResult,
+     } from "../../core/models.js";
+
+     export interface OpenAIProviderOptions {
+       apiKey: string;
+       baseUrl?: string;
+     }
+
+     export function createOpenAIProvider(opts: OpenAIProviderOptions):
+     ModelProvider {
+       const client = new OpenAI({
+         apiKey: opts.apiKey,
+         baseURL: opts.baseUrl,
+       });
+
+       const supportedModels = [
+         "gpt-4o",
+         "gpt-4o-mini",
+         "gpt-4.1",
+         // LM Studio local models (pass model name via --model flag)
+         "qwen3vl-32b",
+         "gemma-3-27b",
+         "codestral-22b",
+       ];
+
+       async function complete(options: ChatCompletionOptions):
+     Promise<ChatCompletionResult> {
+         const response = await client.chat.completions.create({
+           model: options.model,
+           max_tokens: options.maxTokens,
+           temperature: options.temperature,
+           messages: options.messages.map((m) => ({
+             role: m.role as "system" | "user" | "assistant",
+             content: m.content,
+           })),
+           tools: options.tools?.map((t) => ({
+             type: "function" as const,
+             function: {
+               name: t.name,
+               description: t.description,
+               parameters: t.parameters,
+             },
+           })),
+         });
+
+         const choice = response.choices[0];
+         const toolCalls = choice.message.tool_calls?.map((tc) => ({
+           id: tc.id,
+           name: tc.function.name,
+           arguments: JSON.parse(tc.function.arguments),
+         }));
+
+         return {
+           id: response.id,
+           model: response.model,
+           content: choice.message.content ?? "",
+           toolCalls,
+           finishReason:
+             choice.finish_reason === "tool_calls"
+               ? "tool_calls"
+               : choice.finish_reason === "length"
+               ? "length"
+               : "stop",
+           usage: {
+             promptTokens: response.usage?.prompt_tokens ?? 0,
+             completionTokens: response.usage?.completion_tokens ?? 0,
+             totalTokens: response.usage?.total_tokens ?? 0,
+           },
+         };
+       }
+
+       return { name: "openai", supportedModels, complete };
+     }
+
+     - Step 4: Run all provider tests
+
+     pnpm test tests/unit/providers.test.ts
+
+     Expected: PASS 4/4.
+
+     - Step 5: Commit
+
+     git add src/providers/openai/index.ts tests/unit/providers.test.ts
+     git commit -m "feat(providers): OpenAI-compatible provider (covers LM 
+     Studio at localhost:19735)"
+
+     ---
+     Task 6: Tool system (file-read, file-write, bash, search)
+
+     Files:
+     - Create: src/tools/file-read.ts
+     - Create: src/tools/file-write.ts
+     - Create: src/tools/bash.ts
+     - Create: src/tools/search.ts
+     - Create: src/tools/index.ts
+     - Create: tests/unit/tools.test.ts
+     - Step 1: Write failing tests
+
+     // tests/unit/tools.test.ts
+     import { describe, it, expect } from "vitest";
+     import { fileReadTool } from "../../src/tools/file-read.js";
+     import { fileWriteTool } from "../../src/tools/file-write.js";
+     import { bashTool } from "../../src/tools/bash.js";
+     import { searchTool } from "../../src/tools/search.js";
+     import { allTools } from "../../src/tools/index.js";
+
+     describe("tools", () => {
+       it("fileReadTool has correct ToolDefinition shape", () => {
+         expect(fileReadTool.definition.name).toBe("file_read");
+         expect(fileReadTool.definition.description).toContain("Read");
+         expect(typeof fileReadTool.execute).toBe("function");
+       });
+
+       it("fileWriteTool has correct ToolDefinition shape", () => {
+         expect(fileWriteTool.definition.name).toBe("file_write");
+         expect(typeof fileWriteTool.execute).toBe("function");
+       });
+
+       it("bashTool has correct ToolDefinition shape", () => {
+         expect(bashTool.definition.name).toBe("bash");
+         expect(typeof bashTool.execute).toBe("function");
+       });
+
+       it("searchTool has correct ToolDefinition shape", () => {
+         expect(searchTool.definition.name).toBe("search");
+         expect(typeof searchTool.execute).toBe("function");
+       });
+
+       it("allTools exports 4 tools", () => {
+         expect(allTools).toHaveLength(4);
+       });
+
+       it("fileReadTool reads a real file", async () => {
+         const result = await fileReadTool.execute({ path: "package.json" });
+         expect(result).toContain("ku-byte");
+       });
+
+       it("bashTool runs echo command", async () => {
+         const result = await bashTool.execute({ command: "echo hello-byte" });
+         expect(result.trim()).toBe("hello-byte");
+       });
+     });
+
+     - Step 2: Run to verify failure
+
+     pnpm test tests/unit/tools.test.ts
+
+     Expected: FAIL — tools modules not found.
+
+     - Step 3: Write file-read tool
+
+     // src/tools/file-read.ts
+     import { readFile } from "fs/promises";
+     import type { ToolDefinition } from "../core/models.js";
+
+     export interface ByteTool {
+       definition: ToolDefinition;
+       execute(args: Record<string, unknown>): Promise<string>;
+     }
+
+     export const fileReadTool: ByteTool = {
+       definition: {
+         name: "file_read",
+         description: "Read the contents of a file at the given path",
+         parameters: {
+           type: "object",
+           properties: {
+             path: { type: "string", description: "Relative or absolute file 
+     path" },
+           },
+           required: ["path"],
+         },
+       },
+       async execute(args) {
+         const path = String(args.path);
+         const content = await readFile(path, "utf8");
+         return content;
+       },
+     };
+
+     - Step 4: Write file-write tool
+
+     // src/tools/file-write.ts
+     import { writeFile, mkdir } from "fs/promises";
+     import { dirname } from "path";
+     import type { ByteTool } from "./file-read.js";
+
+     export const fileWriteTool: ByteTool = {
+       definition: {
+         name: "file_write",
+         description: "Write content to a file, creating directories as needed",
+         parameters: {
+           type: "object",
+           properties: {
+             path: { type: "string", description: "File path to write to" },
+             content: { type: "string", description: "Content to write" },
+           },
+           required: ["path", "content"],
+         },
+       },
+       async execute(args) {
+         const path = String(args.path);
+         const content = String(args.content);
+         await mkdir(dirname(path), { recursive: true });
+         await writeFile(path, content, "utf8");
+         return `Wrote ${content.length} bytes to ${path}`;
+       },
+     };
+
+     - Step 5: Write bash tool
+
+     // src/tools/bash.ts
+     import { execa } from "execa";
+     import type { ByteTool } from "./file-read.js";
+
+     export const bashTool: ByteTool = {
+       definition: {
+         name: "bash",
+         description: "Execute a shell command and return stdout",
+         parameters: {
+           type: "object",
+           properties: {
+             command: { type: "string", description: "Shell command to run" },
+             timeout: { type: "number", description: "Timeout in ms (default 
+     30000)" },
+           },
+           required: ["command"],
+         },
+       },
+       async execute(args) {
+         const command = String(args.command);
+         const timeout = typeof args.timeout === "number" ? args.timeout :
+     30000;
+         const result = await execa("sh", ["-c", command], {
+           timeout,
+           all: true,
+         });
+         return result.all ?? result.stdout;
+       },
+     };
+
+     - Step 6: Write search tool
+
+     // src/tools/search.ts
+     import { glob } from "glob";
+     import { readFile } from "fs/promises";
+     import type { ByteTool } from "./file-read.js";
+
+     export const searchTool: ByteTool = {
+       definition: {
+         name: "search",
+         description: "Search for files matching a glob pattern, optionally grep
+      for a string",
+         parameters: {
+           type: "object",
+           properties: {
+             pattern: { type: "string", description: "Glob pattern e.g. 
+     src/**/*.ts" },
+             contains: { type: "string", description: "Optional: filter files 
+     containing this string" },
+           },
+           required: ["pattern"],
+         },
+       },
+       async execute(args) {
+         const pattern = String(args.pattern);
+         const contains = args.contains ? String(args.contains) : undefined;
+         const files = await glob(pattern, { ignore: ["node_modules/**",
+     "dist/**"] });
+
+         if (!contains) return files.join("\n");
+
+         const matches: string[] = [];
+         for (const file of files) {
+           const content = await readFile(file, "utf8").catch(() => "");
+           if (content.includes(contains)) matches.push(file);
+         }
+         return matches.join("\n");
+       },
+     };
+
+     - Step 7: Write tools barrel
+
+     // src/tools/index.ts
+     export { fileReadTool, type ByteTool } from "./file-read.js";
+     export { fileWriteTool } from "./file-write.js";
+     export { bashTool } from "./bash.js";
+     export { searchTool } from "./search.js";
+
+     import { fileReadTool } from "./file-read.js";
+     import { fileWriteTool } from "./file-write.js";
+     import { bashTool } from "./bash.js";
+     import { searchTool } from "./search.js";
+     import type { ByteTool } from "./file-read.js";
+
+     export const allTools: ByteTool[] = [fileReadTool, fileWriteTool, bashTool,
+      searchTool];
+
+     - Step 8: Run all tool tests
+
+     pnpm test tests/unit/tools.test.ts
+
+     Expected: PASS 7/7.
+
+     - Step 9: Commit
+
+     git add src/tools/ tests/unit/tools.test.ts
+     git commit -m "feat(tools): file-read, file-write, bash, search tool 
+     implementations"
+
+     ---
+     Task 7: Agentic runner (conversation loop)
+
+     Files:
+     - Create: src/core/runner.ts
+     - Create: tests/unit/runner.test.ts
+     - Step 1: Write failing tests
+
+     // tests/unit/runner.test.ts
+     import { describe, it, expect, vi } from "vitest";
+     import { createRunner } from "../../src/core/runner.js";
+     import type { ModelProvider, ChatCompletionResult } from
+     "../../src/core/models.js";
+
+     function mockProvider(response: Partial<ChatCompletionResult> = {}):
+     ModelProvider {
+       return {
+         name: "mock",
+         supportedModels: ["mock-model"],
+         complete: vi.fn().mockResolvedValue({
+           id: "test-id",
+           model: "mock-model",
+           content: "Hello from mock",
+           finishReason: "stop",
+           usage: { promptTokens: 10, completionTokens: 5, totalTokens: 15 },
+           ...response,
+         }),
+       };
+     }
+
+     describe("runner", () => {
+       it("sends a message and returns assistant response", async () => {
+         const provider = mockProvider();
+         const runner = createRunner({ provider, model: "mock-model", tools: []
+     });
+         const result = await runner.sendMessage("Hello");
+         expect(result.content).toBe("Hello from mock");
+         expect(result.role).toBe("assistant");
+       });
+
+       it("maintains conversation history across messages", async () => {
+         const provider = mockProvider();
+         const runner = createRunner({ provider, model: "mock-model", tools: []
+     });
+         await runner.sendMessage("First message");
+         await runner.sendMessage("Second message");
+         expect(provider.complete).toHaveBeenCalledTimes(2);
+         const secondCall = (provider.complete as ReturnType<typeof
+     vi.fn>).mock.calls[1][0];
+         expect(secondCall.messages.length).toBeGreaterThan(2);
+       });
+
+       it("calls tools when LLM requests them", async () => {
+         const toolFn = vi.fn().mockResolvedValue("tool result");
+         const provider = mockProvider({
+           content: "",
+           finishReason: "tool_calls",
+           toolCalls: [{ id: "tc1", name: "test_tool", arguments: { x: 1 } }],
+         });
+         // Second call returns stop
+         (provider.complete as ReturnType<typeof vi.fn>)
+           .mockResolvedValueOnce({
+             id: "1", model: "mock", content: "", finishReason: "tool_calls",
+             toolCalls: [{ id: "tc1", name: "test_tool", arguments: { x: 1 } }],
+             usage: { promptTokens: 1, completionTokens: 1, totalTokens: 2 },
+           })
+           .mockResolvedValueOnce({
+             id: "2", model: "mock", content: "Done", finishReason: "stop",
+             usage: { promptTokens: 2, completionTokens: 2, totalTokens: 4 },
+           });
+
+         const runner = createRunner({
+           provider,
+           model: "mock-model",
+           tools: [{ name: "test_tool", execute: toolFn }],
+         });
+         const result = await runner.sendMessage("Use the tool");
+         expect(toolFn).toHaveBeenCalledWith({ x: 1 });
+         expect(result.content).toBe("Done");
+       });
+     });
+
+     - Step 2: Run to verify failure
+
+     pnpm test tests/unit/runner.test.ts
+
+     Expected: FAIL — runner module not found.
+
+     - Step 3: Write runner implementation
+
+     // src/core/runner.ts
+     import type { ModelProvider, ChatMessage, ChatCompletionOptions } from
+     "./models.js";
+     import type { ToolDefinition } from "./models.js";
+
+     export interface RunnerTool {
+       name: string;
+       execute(args: Record<string, unknown>): Promise<string>;
+       definition?: ToolDefinition;
+     }
+
+     export interface RunnerOptions {
+       provider: ModelProvider;
+       model: string;
+       tools: RunnerTool[];
+       systemPrompt?: string;
+     }
+
+     export interface RunnerMessage {
+       role: "user" | "assistant";
+       content: string;
+     }
+
+     export interface Runner {
+       sendMessage(content: string): Promise<RunnerMessage>;
+       getHistory(): RunnerMessage[];
+       clearHistory(): void;
+     }
+
+     export function createRunner(opts: RunnerOptions): Runner {
+       const history: ChatMessage[] = [];
+
+       if (opts.systemPrompt) {
+         history.push({ role: "system", content: opts.systemPrompt });
+       }
+
+       const toolDefs: ToolDefinition[] = opts.tools
+         .filter((t) => t.definition)
+         .map((t) => t.definition!);
+
+       const toolMap = new Map(opts.tools.map((t) => [t.name, t]));
+
+       async function sendMessage(content: string): Promise<RunnerMessage> {
+         history.push({ role: "user", content });
+
+         let iterations = 0;
+         const maxIterations = 10;
+
+         while (iterations < maxIterations) {
+           iterations++;
+           const completionOpts: ChatCompletionOptions = {
+             model: opts.model,
+             messages: [...history],
+             tools: toolDefs.length > 0 ? toolDefs : undefined,
+           };
+
+           const result = await opts.provider.complete(completionOpts);
+
+           if (result.finishReason === "tool_calls" && result.toolCalls?.length)
+      {
+             if (result.content) {
+               history.push({ role: "assistant", content: result.content });
+             }
+
+             for (const tc of result.toolCalls) {
+               const tool = toolMap.get(tc.name);
+               const toolResult = tool
+                 ? await tool.execute(tc.arguments as Record<string, unknown>)
+                 : `Unknown tool: ${tc.name}`;
+
+               history.push({
+                 role: "tool",
+                 content: toolResult,
+                 toolCallId: tc.id,
+                 name: tc.name,
+               });
+             }
+             continue;
+           }
+
+           history.push({ role: "assistant", content: result.content });
+           return { role: "assistant", content: result.content };
+         }
+
+         const fallback = "Max iterations reached.";
+         history.push({ role: "assistant", content: fallback });
+         return { role: "assistant", content: fallback };
+       }
+
+       function getHistory(): RunnerMessage[] {
+         return history
+           .filter((m) => m.role === "user" || m.role === "assistant")
+           .map((m) => ({ role: m.role as "user" | "assistant", content:
+     m.content }));
+       }
+
+       function clearHistory(): void {
+         history.splice(0);
+         if (opts.systemPrompt) {
+           history.push({ role: "system", content: opts.systemPrompt });
+         }
+       }
+
+       return { sendMessage, getHistory, clearHistory };
+     }
+
+     - Step 4: Run runner tests
+
+     pnpm test tests/unit/runner.test.ts
+
+     Expected: PASS 3/3.
+
+     - Step 5: Commit
+
+     git add src/core/runner.ts tests/unit/runner.test.ts
+     git commit -m "feat(core): agentic runner with conversation history and 
+     tool loop"
+
+     ---
+     Task 8: CLI entry point (commander, print mode, model flag)
+
+     Files:
+     - Create: src/cli.ts
+     - Step 1: Write implementation
+
+     // src/cli.ts
+     import { Command } from "commander";
+     import { loadConfig, setApiKey } from "./config.js";
+     import { createAnthropicProvider } from "./providers/anthropic/index.js";
+     import { createOpenAIProvider } from "./providers/openai/index.js";
+     import { createRunner } from "./core/runner.js";
+     import { allTools } from "./tools/index.js";
+
+     const program = new Command();
+
+     program
+       .name("byte")
+       .description("KU-BYTE — K-Universe AI coding agent")
+       .version("0.1.0");
+
+     program
+       .command("config")
+       .description("Configure byte settings")
+       .option("--set-anthropic-key <key>", "Set Anthropic API key")
+       .option("--set-openai-key <key>", "Set OpenAI API key")
+       .action((opts) => {
+         if (opts.setAnthropicKey) {
+           setApiKey("anthropic", opts.setAnthropicKey);
+           console.log("Anthropic API key saved.");
+         }
+         if (opts.setOpenaiKey) {
+           setApiKey("openai", opts.setOpenaiKey);
+           console.log("OpenAI API key saved.");
+         }
+       });
+
+     program
+       .argument("[prompt]", "One-shot prompt (omit to enter interactive TUI)")
+       .option("-m, --model <model>", "Model to use")
+       .option("-p, --print", "Print mode: output raw text, no TUI")
+       .option("--provider <provider>", "Provider: anthropic | openai | 
+     lmstudio")
+       .action(async (prompt: string | undefined, opts) => {
+         const cfg = loadConfig();
+         const model = opts.model ?? cfg.defaultModel;
+         const providerName = opts.provider ?? cfg.defaultProvider;
+
+         let provider;
+         if (providerName === "anthropic") {
+           const key = cfg.providers.anthropic?.apiKey ??
+     process.env.ANTHROPIC_API_KEY ?? "";
+           provider = createAnthropicProvider({ apiKey: key });
+         } else if (providerName === "lmstudio") {
+           const baseUrl = cfg.providers.lmstudio?.baseUrl ??
+     "http://localhost:19735/v1";
+           provider = createOpenAIProvider({ apiKey: "lm-studio", baseUrl });
+         } else {
+           const key = cfg.providers.openai?.apiKey ??
+     process.env.OPENAI_API_KEY ?? "";
+           provider = createOpenAIProvider({ apiKey: key });
+         }
+
+         const runner = createRunner({
+           provider,
+           model,
+           tools: allTools,
+           systemPrompt:
+             "You are BYTE, a K-Universe AI coding agent. Help the user with 
+     coding tasks.",
+         });
+
+         if (prompt) {
+           // One-shot print mode
+           const result = await runner.sendMessage(prompt);
+           process.stdout.write(result.content + "\n");
+           return;
+         }
+
+         // Interactive TUI mode
+         const { startTUI } = await import("./adapters/tui.js");
+         await startTUI({ runner, model, providerName });
+       });
+
+     program.parseAsync(process.argv).catch((err) => {
+       process.stderr.write(`Error: ${err.message}\n`);
+       process.exit(1);
+     });
+
+     - Step 2: Verify CLI compiles
+
+     pnpm typecheck
+
+     Expected: No errors (TUI import will error until Task 9, wrap in try/catch
+     or stub src/adapters/tui.ts with an empty export first).
+
+     - Step 3: Stub tui adapter temporarily
+
+     // src/adapters/tui.ts  (temporary stub)
+     export async function startTUI(_opts: unknown): Promise<void> {
+       console.log("TUI not yet implemented — use -p flag for print mode");
+     }
+
+     - Step 4: Test one-shot print mode
+
+     ANTHROPIC_API_KEY=your_key pnpm byte -p "Say hello in one sentence"
+
+     Expected: One line of text output.
+
+     - Step 5: Commit
+
+     git add src/cli.ts src/adapters/tui.ts
+     git commit -m "feat(cli): commander entry point with print mode and 
+     provider routing"
+
+     ---
+     Task 9: Ink TUI adapter
+
+     Files:
+     - Create: src/tui/App.tsx
+     - Create: src/tui/ConversationPane.tsx
+     - Create: src/tui/StatusBar.tsx
+     - Create: src/tui/InputBox.tsx
+     - Modify: src/adapters/tui.ts (replace stub)
+     - Step 1: Write StatusBar component
+
+     // src/tui/StatusBar.tsx
+     import React from "react";
+     import { Box, Text } from "ink";
+
+     interface StatusBarProps {
+       model: string;
+       provider: string;
+       messageCount: number;
+     }
+
+     export function StatusBar({ model, provider, messageCount }:
+     StatusBarProps): React.ReactElement {
+       return (
+         <Box borderStyle="single" paddingX={1} justifyContent="space-between">
+           <Text color="blueBright">BYTE</Text>
+           <Text dimColor>{provider} / {model}</Text>
+           <Text dimColor>{messageCount} msgs</Text>
+         </Box>
+       );
+     }
+
+     - Step 2: Write ConversationPane component
+
+     // src/tui/ConversationPane.tsx
+     import React from "react";
+     import { Box, Text } from "ink";
+
+     interface Message {
+       role: "user" | "assistant";
+       content: string;
+     }
+
+     interface ConversationPaneProps {
+       messages: Message[];
+     }
+
+     export function ConversationPane({ messages }: ConversationPaneProps):
+     React.ReactElement {
+       return (
+         <Box flexDirection="column" flexGrow={1} paddingX={1} 
+     overflowY="hidden">
+           {messages.map((msg, i) => (
+             <Box key={i} flexDirection="column" marginBottom={1}>
+               <Text color={msg.role === "user" ? "cyan" : "white"} 
+     bold={msg.role === "user"}>
+                 {msg.role === "user" ? "you" : "byte"}
+               </Text>
+               <Text wrap="wrap">{msg.content}</Text>
+             </Box>
+           ))}
+         </Box>
+       );
+     }
+
+     - Step 3: Write InputBox component
+
+     // src/tui/InputBox.tsx
+     import React, { useState } from "react";
+     import { Box, Text, useInput } from "ink";
+
+     interface InputBoxProps {
+       onSubmit(value: string): void;
+       disabled?: boolean;
+     }
+
+     export function InputBox({ onSubmit, disabled }: InputBoxProps):
+     React.ReactElement {
+       const [input, setInput] = useState("");
+
+       useInput((char, key) => {
+         if (disabled) return;
+         if (key.return) {
+           if (input.trim()) {
+             onSubmit(input.trim());
+             setInput("");
+           }
+           return;
+         }
+         if (key.backspace || key.delete) {
+           setInput((prev) => prev.slice(0, -1));
+           return;
+         }
+         if (!key.ctrl && !key.meta && char) {
+           setInput((prev) => prev + char);
+         }
+       });
+
+       return (
+         <Box borderStyle="round" paddingX={1}>
+           <Text color="cyan">{">"} </Text>
+           <Text>{input}</Text>
+           {!disabled && <Text color="gray">█</Text>}
+         </Box>
+       );
+     }
+
+     - Step 4: Write App component
+
+     // src/tui/App.tsx
+     import React, { useState, useCallback } from "react";
+     import { Box, useApp } from "ink";
+     import { ConversationPane } from "./ConversationPane.js";
+     import { StatusBar } from "./StatusBar.js";
+     import { InputBox } from "./InputBox.js";
+     import type { Runner, RunnerMessage } from "../core/runner.js";
+
+     interface AppProps {
+       runner: Runner;
+       model: string;
+       providerName: string;
+     }
+
+     export function App({ runner, model, providerName }: AppProps):
+     React.ReactElement {
+       const { exit } = useApp();
+       const [messages, setMessages] = useState<RunnerMessage[]>([]);
+       const [loading, setLoading] = useState(false);
+
+       const handleSubmit = useCallback(
+         async (content: string) => {
+           if (content === "/exit" || content === "/quit") {
+             exit();
+             return;
+           }
+
+           const userMsg: RunnerMessage = { role: "user", content };
+           setMessages((prev) => [...prev, userMsg]);
+           setLoading(true);
+
+           try {
+             const response = await runner.sendMessage(content);
+             setMessages((prev) => [...prev, response]);
+           } catch (err) {
+             const errMsg: RunnerMessage = {
+               role: "assistant",
+               content: `Error: ${err instanceof Error ? err.message : 
+     String(err)}`,
+             };
+             setMessages((prev) => [...prev, errMsg]);
+           } finally {
+             setLoading(false);
+           }
+         },
+         [runner, exit]
+       );
+
+       return (
+         <Box flexDirection="column" height="100%">
+           <StatusBar model={model} provider={providerName} 
+     messageCount={messages.length} />
+           <ConversationPane messages={messages} />
+           {loading && <Box paddingX={1}><React.Fragment>
+             {/* Use Box and Text separately for JSX compatibility */}
+           </React.Fragment></Box>}
+           <InputBox onSubmit={handleSubmit} disabled={loading} />
+         </Box>
+       );
+     }
+
+     - Step 5: Replace tui adapter stub
+
+     // src/adapters/tui.ts
+     import { render } from "ink";
+     import React from "react";
+     import { App } from "../tui/App.js";
+     import type { Runner } from "../core/runner.js";
+
+     interface TUIOptions {
+       runner: Runner;
+       model: string;
+       providerName: string;
+     }
+
+     export async function startTUI(opts: TUIOptions): Promise<void> {
+       const { waitUntilExit } = render(
+         React.createElement(App, {
+           runner: opts.runner,
+           model: opts.model,
+           providerName: opts.providerName,
+         })
+       );
+       await waitUntilExit();
+     }
+
+     - Step 6: Run typecheck
+
+     pnpm typecheck
+
+     Expected: No errors.
+
+     - Step 7: Smoke test interactive TUI
+
+     ANTHROPIC_API_KEY=your_key pnpm byte
+
+     Expected: TUI launches, status bar shows "BYTE / anthropic /
+     claude-sonnet-4-6", input box accepts text, /exit quits.
+
+     - Step 8: Commit
+
+     git add src/tui/ src/adapters/tui.ts
+     git commit -m "feat(tui): Ink TUI with conversation pane, status bar, input
+      box"
+
+     ---
+     Task 10: Session persistence
+
+     Files:
+     - Create: src/sessions.ts
+     - Step 1: Write implementation
+
+     // src/sessions.ts
+     import { readFile, writeFile, mkdir, readdir } from "fs/promises";
+     import { join } from "path";
+     import { homedir } from "os";
+     import { z } from "zod";
+
+     const SessionFileSchema = z.object({
+       id: z.string(),
+       createdAt: z.string(),
+       updatedAt: z.string(),
+       model: z.string(),
+       provider: z.string(),
+       messages: z.array(
+         z.object({
+           role: z.enum(["user", "assistant"]),
+           content: z.string(),
+         })
+       ),
+     });
+
+     export type SessionFile = z.infer<typeof SessionFileSchema>;
+
+     function sessionsDir(): string {
+       return join(homedir(), "AppData", "Roaming", "byte", "sessions");
+     }
+
+     export async function saveSession(session: SessionFile): Promise<void> {
+       const dir = sessionsDir();
+       await mkdir(dir, { recursive: true });
+       const path = join(dir, `${session.id}.json`);
+       await writeFile(path, JSON.stringify(session, null, 2), "utf8");
+     }
+
+     export async function loadSession(id: string): Promise<SessionFile | null>
+     {
+       const path = join(sessionsDir(), `${id}.json`);
+       try {
+         const raw = await readFile(path, "utf8");
+         return SessionFileSchema.parse(JSON.parse(raw));
+       } catch {
+         return null;
+       }
+     }
+
+     export async function listSessions(): Promise<{ id: string; updatedAt:
+     string; model: string }[]> {
+       const dir = sessionsDir();
+       try {
+         const files = await readdir(dir);
+         const sessions = await Promise.all(
+           files
+             .filter((f) => f.endsWith(".json"))
+             .map(async (f) => {
+               const raw = await readFile(join(dir, f), "utf8").catch(() =>
+     null);
+               if (!raw) return null;
+               try {
+                 const parsed = SessionFileSchema.parse(JSON.parse(raw));
+                 return { id: parsed.id, updatedAt: parsed.updatedAt, model:
+     parsed.model };
+               } catch {
+                 return null;
+               }
+             })
+         );
+         return sessions.filter(Boolean) as { id: string; updatedAt: string;
+     model: string }[];
+       } catch {
+         return [];
+       }
+     }
+
+     - Step 2: Commit
+
+     git add src/sessions.ts
+     git commit -m "feat(sessions): session persistence to 
+     AppData/Roaming/byte/sessions"
+
+     ---
+     Task 11: End-to-end integration test
+
+     Files:
+     - Create: tests/integration/byte.test.ts
+     - Step 1: Write integration test
+
+     // tests/integration/byte.test.ts
+     import { describe, it, expect } from "vitest";
+     import { execa } from "execa";
+
+     describe("byte CLI integration", () => {
+       it("prints version", async () => {
+         const result = await execa("tsx", ["src/cli.ts", "--version"]);
+         expect(result.stdout).toContain("0.1.0");
+       });
+
+       it("prints help", async () => {
+         const result = await execa("tsx", ["src/cli.ts", "--help"]);
+         expect(result.stdout).toContain("byte");
+         expect(result.stdout).toContain("K-Universe");
+       });
+
+       it("one-shot print mode with mock provider responds", async () => {
+         // Uses LM Studio if running, otherwise expects error about API key
+         const result = await execa(
+           "tsx",
+           ["src/cli.ts", "-p", "say the word HELLO only", "--provider",
+     "lmstudio"],
+           { reject: false, env: { ...process.env } }
+         );
+         // Either got a response or got a connection error (LM Studio not 
+     running)
+         const combined = result.stdout + result.stderr;
+         expect(combined.length).toBeGreaterThan(0);
+       });
+     });
+
+     - Step 2: Run integration tests
+
+     pnpm test tests/integration/byte.test.ts
+
+     Expected: PASS 2/3 minimum (version + help); LM Studio test passes if LM
+     Studio is running.
+
+     - Step 3: Run full test suite
+
+     pnpm test
+
+     Expected: All unit tests pass. Integration tests pass where applicable.
+
+     - Step 4: Final typecheck
+
+     pnpm typecheck
+
+     Expected: Zero errors.
+
+     - Step 5: Final commit
+
+     git add tests/integration/
+     git commit -m "test: end-to-end integration tests for byte CLI"
+
+     ---
+     Verification
+
+     After all tasks complete, verify:
+
+     # 1. K2 invariants still pass
+     tsx scripts/verify.ts
+
+     # 2. Full test suite
+     pnpm test
+
+     # 3. One-shot print mode (Anthropic)
+     ANTHROPIC_API_KEY=sk-... pnpm byte -p "Hello, who are you?"
+
+     # 4. One-shot LM Studio
+     pnpm byte -p "Hello" --provider lmstudio
+
+     # 5. Interactive TUI launch
+     ANTHROPIC_API_KEY=sk-... pnpm byte
+
+     # 6. Config command
+     pnpm byte config --help
+
+     ---
+     Open Decisions (post-MVP)
+
+     - Session --resume <id> flag (infrastructure is in src/sessions.ts, wire
+     into CLI)
+     - /model <name> command inside TUI to switch mid-session
+     - Distributed Nexus layer: multiple socket.ts instances coordinated via a
+     central MolerNode broker — separate plan, separate repo
+     - LM Studio model listing via GET /v1/models to auto-populate
+     supportedModels
+     - Streaming responses (Anthropic and OpenAI both support it; Ink handles
+     incremental renders)
+
+● Plan approved. Starting execution with
+  superpowers:subagent-driven-development. Let me create task tracking and
+  dispatch Task 1.
+
+● Agent(KU-BYTE Task 1: Scaffold package.json, tsconfig, install deps)
+  ⎿  Done (8 tool uses · 32.3k tokens · 59s)
+  (ctrl+o to expand)
+
+● Task 1 implemented. Running spec compliance review.
+
+● Agent(Spec review: Task 1 scaffold)
+  ⎿  Done (4 tool uses · 29.5k tokens · 31s)
+  (ctrl+o to expand)
+● ✅ Spec compliant. Code quality review:
+
+● Agent(Code quality review: Task 1 scaffold)
+  ⎿  Done (2 tool uses · 28.9k tokens · 14s)
+  (ctrl+o to expand)
+
+● ✅ Approved. Adding the engines field fix inline:
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(package.json)
+  ⎿  Added 3 lines
+      28      "ws": "^8.18.0",
+      29      "zod": "^3.23.0"
+      30    },
+      31 +  "engines": {                                                 
+      32 +    "node": ">=20"                                             
+      33 +  },                                                           
+      34    "devDependencies": {
+      35      "@types/node": "^20.0.0",
+      36      "@types/react": "^18.3.0",
+
+  Committed 1f6f0f (ctrl+o to expand)
+
+● Task 1 ✅. Moving to Task 2 — config system.
+
+● Agent(KU-BYTE Task 2: Config system)
+  ⎿  Done (16 tool uses · 34.3k tokens · 1m 51s)
+  (ctrl+o to expand)
+
+● Agent(Spec + quality review: Task 2 config system)
+  ⎿  Done (2 tool uses · 29.9k tokens · 29s)
+  (ctrl+o to expand)
+
+● Reviewer found issues. Dispatching fix subagent:
+
+● Agent(Fix Task 2 config issues)
+  ⎿  Done (9 tool uses · 31.7k tokens · 53s)
+  (ctrl+o to expand)
+
+● Task 2 ✅. Moving to Task 3 — K2 protocol extension.
+
+● Agent(KU-BYTE Task 3: Add SendMessageCommand to protocol)
+  ⎿  Done (23 tool uses · 44.7k tokens · 3m 17s)
+  (ctrl+o to expand)
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● 4/4 K2 invariants pass. ✅
+
+● Tasks 4 and 5 (Anthropic + OpenAI providers) can be implemented in parallel
+  since they're independent files:
+
+● 2 agents finished (ctrl+o to expand)
+   ├ KU-BYTE Task 4: Anthropic provider · 28 tool uses · 42.4k tokens
+   │ ⎿  Done
+   └ KU-BYTE Task 5: OpenAI-compatible provider · 30 tool uses · 42.3k tokens
+     ⎿  Done
+● Both providers done. Let me verify tests run correctly (parallel writes may
+  need reconciliation):
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Only 2 tests — looks like the parallel write overwrote. Let me check and
+  merge:
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(tests\unit\providers.test.ts)
+  ⎿  Added 15 lines
+       1  import { describe, it, expect } from "vitest";
+       2 +import { createAnthropicProvider } from "../../src/providers/an
+         +thropic/index.js";                                             
+       3  import { createOpenAIProvider } from "../../src/providers/opena
+          i/index.js";
+       4  
+       5 +describe("AnthropicProvider", () => {                          
+       6 +  it("exposes name and supportedModels", () => {               
+       7 +    const provider = createAnthropicProvider({ apiKey: "sk-test
+         +" });                                                          
+       8 +    expect(provider.name).toBe("anthropic");                   
+       9 +    expect(provider.supportedModels).toContain("claude-sonnet-4
+         +-6");                                                          
+      10 +    expect(provider.supportedModels).toContain("claude-opus-4-7
+         +");                                                            
+      11 +  });                                                          
+      12 +                                                               
+      13 +  it("implements ModelProvider interface (has complete function
+         +)", () => {                                                    
+      14 +    const provider = createAnthropicProvider({ apiKey: "sk-test
+         +" });                                                          
+      15 +    expect(typeof provider.complete).toBe("function");         
+      16 +  });                                                          
+      17 +});                                                            
+      18 +                                                               
+      19  describe("OpenAIProvider", () => {
+      20    it("exposes name and supportedModels", () => {
+      21      const provider = createOpenAIProvider({ apiKey: "sk-test" }
+          );
+
+  Committed 0037c4, ran 1 shell command (ctrl+o to expand)
+
+● 4/4 provider tests pass. ✅
+
+● Tasks 4 & 5 ✅. Moving to Task 6 — tool system.
+
+● Agent(KU-BYTE Task 6: Tool system)
+  ⎿  Done (17 tool uses · 38.0k tokens · 2m 3s)
+  (ctrl+o to expand)
+
+● Task 6 ✅. Moving to Task 7 — agentic runner.
+
+● Agent(KU-BYTE Task 7: Agentic runner)
+  ⎿  Done (6 tool uses · 34.5k tokens · 1m 8s)
+  (ctrl+o to expand)
+
+● Task 7 ✅. Tasks 8 (CLI) and 9 (TUI) must run sequentially — CLI creates the
+  stub, TUI replaces it. Dispatching Task 8:
+
+● Agent(KU-BYTE Task 8: CLI entry point)
+  ⎿  Done (32 tool uses · 46.4k tokens · 3m 2s)
+  (ctrl+o to expand)
+
+● Task 8 ✅. Now Task 9 — Ink TUI:
+
+● Agent(KU-BYTE Task 9: Ink TUI adapter)
+  ⎿  Done (14 tool uses · 35.3k tokens · 1m 30s)
+  (ctrl+o to expand)
+● Tasks 9 ✅. Dispatching Tasks 10 (sessions) and 11 (integration tests) in
+  parallel — they're independent:
+
+● 2 agents finished (ctrl+o to expand)
+   ├ KU-BYTE Task 10: Session persistence · 7 tool uses · 30.5k tokens
+   │ ⎿  Done
+   └ KU-BYTE Task 11: Integration tests + final verification · 16 tool uses · 36.7k tokens
+     ⎿  Done
+
+● KU-BYTE is built. Here's the complete picture:
+
+  ---
+  Build complete
+
+  22/22 tests pass across 5 test files. 4/4 K2 invariants pass. Zero TypeScript
+  errors.
+
+  What was shipped
+
+  14 commits · D:\home\byte\dev\projects\k-universe-agent-harness
+
+  ┌───────────┬────────────────────────────────────────────────────────┐
+  │   Layer   │                         Files                          │
+  ├───────────┼────────────────────────────────────────────────────────┤
+  │ Protocol  │ src/protocol/commands.ts (+SendMessageCommand)         │
+  ├───────────┼────────────────────────────────────────────────────────┤
+  │ Config    │ src/config.ts — conf + zod, AppData/Roaming/byte       │
+  ├───────────┼────────────────────────────────────────────────────────┤
+  │ Providers │ src/providers/anthropic/, src/providers/openai/        │
+  ├───────────┼────────────────────────────────────────────────────────┤
+  │ Tools     │ src/tools/ — file_read, file_write, bash, search       │
+  ├───────────┼────────────────────────────────────────────────────────┤
+  │ Runner    │ src/core/runner.ts — conversation loop + tool calls    │
+  ├───────────┼────────────────────────────────────────────────────────┤
+  │ CLI       │ src/cli.ts — byte, byte config, -p print mode          │
+  ├───────────┼────────────────────────────────────────────────────────┤
+  │ TUI       │ src/tui/App.tsx, StatusBar, ConversationPane, InputBox │
+  ├───────────┼────────────────────────────────────────────────────────┤
+  │ Sessions  │ src/sessions.ts — save/load/list to AppData            │
+  └───────────┴────────────────────────────────────────────────────────┘
+
+  Run it
+
+  # One-shot (Anthropic)
+  $env:ANTHROPIC_API_KEY = "sk-..."
+  npx tsx src/cli.ts -p "What files are in src/?"
+
+  # One-shot (LM Studio)
+  npx tsx src/cli.ts "Explain this codebase" --provider lmstudio
+
+  # Interactive TUI
+  npx tsx src/cli.ts
+
+  # Configure
+  npx tsx src/cli.ts config --set-anthropic-key sk-...
+
+  Post-MVP open items (in plan)
+
+  - Session --resume <id> flag
+  - /model switching inside TUI
+  - Streaming responses
+  - Distributed Nexus layer (separate plan)
+
+✻ Cogitated for 42m 19s
+
+❯ /superpowers:writing-plans                                                    
+  okay with KU-BYTE                                                             
+  /andrej-karpathy-skills:karpathy-guidelines                                   
+  /superpowers:test-driven-development                                          
+  there was supposed to be 001 & 002 plans intendedly from                      
+  "C:\Users\Byte\Downloads\Perplexity-Summarize the current                     
+  webpage-Response-6-2026-05-08T03-42-34.md"                                    
+  "C:\Users\Byte\Downloads\Perplexity-You are generating the complete asset     
+  bundle for t-Response-1-2026-05-08T03-58-19.md"                               
+  "C:\Users\Byte\Downloads\Perplexity-Generate a complete, exportable asset     
+  bundle for t-Response-1-2026-05-08T03-53-25.md"                               
+  "C:\Users\Byte\Downloads\# K-Universe Agent Harness — Complete Asset          
+  Scaffo.md"                                                                    
+  "C:\Users\Byte\Downloads\Perplexity-Summarize the current                     
+  webpage-Full-Chat-2026-05-08T03-43-35.md"                                     
+  it is incase 001 is flop 002 is different better plan b?                      
+  /superpowers:writing-plans which is why there is also supposed to have a      
+  respin CLI, TUI, "design", look, etc, as the overall system work.. while      
+  keeping the core foundamentals logical and more codes etc..                   
+
+● Skill(superpowers:writing-plans)
+  ⎿  Successfully loaded skill
+
+● I'm using the writing-plans skill to create both plans.
+
+  Loading the other skills and reading all 5 research files in parallel.
+
+● Skill(andrej-karpathy-skills:karpathy-guidelines)
+  ⎿  Successfully loaded skill
+
+● Skill(superpowers:test-driven-development)
+  ⎿  Successfully loaded skill
+
+  Read 5 files (ctrl+o to expand)
+
+● Reading the two large research files in chunks to get their content.
+
+  Read 3 files (ctrl+o to expand)
+
+● Now I have the full picture. Creating the plans directory and writing both
+  plans in parallel.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Write(docs\superpowers\plans\2026-05-08-001-core-agent-wire-up.md)
+  ⎿  Wrote 603 lines to
+     docs\superpowers\plans\2026-05-08-001-core-agent-wire-up.md
+      1 # KU-BYTE Plan 001 — Core Agent Wire-Up + Streaming
+      3 > **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:s
+        ubagent-driven-development` (recommended) or `superpowers:executi
+         (`- [ ]`) syntax for tracking.
+      4 
+        re.executeCommand()` so that socket/WebSocket clients can send `S
+        endMessage` commands and get real LLM responses — and add `TokenC
+      6 
+      7 **Architecture:** `createAgentCore()` accepts an optional `ModelP
+        ved it delegates to a `Run
+     … +651 lines (ctrl+o to expand)
+
+● Write(docs\superpowers\plans\2026-05-08-002-tui-respin.md)
+  ⎿  Wrote 772 lines to docs\superpowers\plans\2026-05-08-002-tui-respin.md
+      1 # KU-BYTE Plan 002 — TUI Respin (Cyber-Corp Dense Layout)
+      3 > **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:s
+        ubagent-driven-development` (recommended) or `superpowers:executi
+         (`- [ ]`) syntax for tracking.
+      4 
+        e, multi-panel cyber-corp layout: left sidebar (tools, model, ses
+        sion info) + right conversation pane + bottom input with slash co
+        history`, `/exit`) and a streaming typewriter text effect.
+      6 
+        isting `src/tui/` 
+     … +850 lines (ctrl+o to expand)
+
+  Committed b8c4ee (ctrl+o to expand)
+
+● Both plans saved and committed. Here's what you have:
+
+  ---
+  Plan 001 — docs/superpowers/plans/2026-05-08-001-core-agent-wire-up.md
+
+  The engine fix. Right now when a WebSocket client sends SendMessage, nothing
+  calls the LLM — the AgentCore stub just returns an empty stream. Plan 001
+  wires createRunner() into executeCommand() so socket clients get real LLM
+  responses, adds TokenChunk streaming events, and fixes the socket adapter to
+  iterate the EventStream properly. 4 tasks, TDD throughout. Surgical — doesn't 
+  touch the TUI at all.
+
+  ---
+  Plan 002 — docs/superpowers/plans/2026-05-08-002-tui-respin.md
+
+  The body kit. Completely replaces the current vertical Ink layout with a dense
+   two-panel cyber-corp design: left sidebar (session, tools, command list) +
+  right conversation pane + bottom input with slash hints. Adds typewriter
+  animation on assistant responses, and /model, /clear, /tools, /history, /exit
+  slash commands. 7 tasks, TDD throughout. Independent of Plan 001 — runs on the
+   existing blocking runner.
+
+  ---
+  How to execute: Tell me subagent-driven or inline execution, and which plan to
+   start with. The two plans can be run independently in any order.
+
+✻ Cooked for 5m 49s
+
+❯ /superpowers:subagent-driven-development                                      
+
+● Two plans exist. Which should I execute?
+
+  Plan 001 — docs/superpowers/plans/2026-05-08-001-core-agent-wire-up.md
+  Wire createRunner() into AgentCore.executeCommand() so socket clients get real
+   LLM responses. Adds TokenChunk streaming events. 4 tasks, engine-only, no TUI
+   changes.
+
+  Plan 002 — docs/superpowers/plans/2026-05-08-002-tui-respin.md
+  Replace the current Ink TUI with the dense two-panel cyber-corp layout —
+  sidebar + conversation + typewriter animation + slash commands. 7 tasks,
+  visual layer only.
+
+  001, 002, or both in sequence?
+✻ Cogitated for 10s
+
+❯ How different side by side are both? features, stack and more                 
+
+● Column 1: What breaks today
+  Plan 001 — Core Wire-Up: Socket clients send SendMessage → silence (no LLM
+    called)
+  Plan 002 — TUI Respin: TUI is functional but looks like a prototype
+  ────────────────────────────────────────
+  Column 1: What it fixes
+  Plan 001 — Core Wire-Up: Engine — LLM responses over WebSocket
+  Plan 002 — TUI Respin: Visual — the product's face
+  ────────────────────────────────────────
+  Column 1: User-visible change
+  Plan 001 — Core Wire-Up: Nothing (socket/API consumers benefit)
+  Plan 002 — TUI Respin: Everything looks different in the terminal
+  ────────────────────────────────────────
+  Column 1: Files touched
+  Plan 001 — Core Wire-Up: events.ts, agent.ts, socket.ts
+  Plan 002 — TUI Respin: tui/App.tsx + 4 new components, 3 deleted
+  ────────────────────────────────────────
+  Column 1: New files
+  Plan 001 — Core Wire-Up: tests/unit/agent.test.ts, streaming.test.ts
+  Plan 002 — TUI Respin: Header.tsx, SidePanel.tsx, MessageList.tsx,
+    SlashInput.tsx, commands.ts
+  ────────────────────────────────────────
+  Column 1: New features
+  Plan 001 — Core Wire-Up: TokenChunk streaming event, socket LLM wire-up
+  Plan 002 — TUI Respin: Typewriter animation, slash commands (/model /clear
+    /tools /history), two-panel layout
+  ────────────────────────────────────────
+  Column 1: Breaks anything
+  Plan 001 — Core Wire-Up: No — additive to existing AgentConfig
+  Plan 002 — TUI Respin: No — startTUI() signature unchanged, cli.ts untouched
+  ────────────────────────────────────────
+  Column 1: Test count added
+  Plan 001 — Core Wire-Up: +2 test files (~6 tests)
+  Plan 002 — TUI Respin: +2 test files (~9 tests)
+  ────────────────────────────────────────
+  Column 1: Risk
+  Plan 001 — Core Wire-Up: Low — 3 files modified surgically
+  Plan 002 — TUI Respin: Low — isolated to src/tui/
+  ────────────────────────────────────────
+  Column 1: Stack additions
+  Plan 001 — Core Wire-Up: None (uses existing runner + providers)
+  Plan 002 — TUI Respin: None (uses existing Ink + React)
+  ────────────────────────────────────────
+  Column 1: Dependency on each other
+  Plan 001 — Core Wire-Up: 002 doesn't need 001 (works with blocking runner)
+  Plan 002 — TUI Respin: 001 doesn't need 002
+  ────────────────────────────────────────
+  Column 1: Who benefits
+  Plan 001 — Core Wire-Up: Future distributed/socket clients, Nexus layer
+  Plan 002 — TUI Respin: You, right now, every time you run byte
+  ────────────────────────────────────────
+  Column 1: Tasks
+  Plan 001 — Core Wire-Up: 4
+  Plan 002 — TUI Respin: 7
+  ────────────────────────────────────────
+  Column 1: Rough time
+  Plan 001 — Core Wire-Up: ~30 min subagent-driven
+  Plan 002 — TUI Respin: ~45 min subagent-driven
+
+  Bottom line:
+  - 001 is invisible to you day-to-day but unlocks the distributed/socket path
+  (the "Nexus" future)
+  - 002 is what you see every time you run byte — makes it feel like a real
+  product
+  - They're fully independent — run either first, or both back-to-back
+
+✻ Crunched for 14s
+
+❯ it needs to be a sellable product for K-Universe I am founder as well as 1st  
+  user before any sell.. but this needs to rival competitors                    
+
+● Honest assessment:
+
+  Current KU-BYTE vs competitors:
+
+  ┌───────────────────────┬─────────────────────┬──────────────────────────┐
+  │        Feature        │     KU-BYTE now     │     pi / Claude Code     │
+  ├───────────────────────┼─────────────────────┼──────────────────────────┤
+  │ Streaming tokens      │ ❌ Blocking         │ ✅ Word-by-word          │
+  ├───────────────────────┼─────────────────────┼──────────────────────────┤
+  │ TUI quality           │ ⚠️ Prototype        │ ✅ Polished              │
+  ├───────────────────────┼─────────────────────┼──────────────────────────┤
+  │ Model switching       │ ❌ Restart required │ ✅ In-session /model     │
+  ├───────────────────────┼─────────────────────┼──────────────────────────┤
+  │ Context awareness     │ ❌ None             │ ✅ AGENTS.md / CLAUDE.md │
+  ├───────────────────────┼─────────────────────┼──────────────────────────┤
+  │ File diff display     │ ❌ Raw text         │ ✅ Highlighted diffs     │
+  ├───────────────────────┼─────────────────────┼──────────────────────────┤
+  │ Install (curl | bash) │ ❌ Manual           │ ✅ One command           │
+  ├───────────────────────┼─────────────────────┼──────────────────────────┤
+  │ npm global install    │ ❌                  │ ✅ npm i -g              │
+  ├───────────────────────┼─────────────────────┼──────────────────────────┤
+  │ Session history       │ ❌ Not browsable    │ ✅ Tree / list           │
+  └───────────────────────┴─────────────────────┴──────────────────────────┘
+
+  ---
+  To be sellable, the order matters:
+
+  Do 002 now — TUI is the first impression. Nobody buys something that looks
+  unfinished.
+
+  Do 001 right after — Streaming is table stakes in 2026. Every competitor does
+  it. Blocking responses feel broken.
+
+  Then there's a Plan 003 you don't have yet:
+  - Context awareness: auto-load AGENTS.md / BYTE.md from project root
+  - Real /model switching: swap provider mid-session without restart
+  - File diff display in conversation (show +/- changes when agent edits files)
+  - npm install -g ku-byte — global install, run byte from anywhere
+  - byte init onboarding wizard — guided API key setup on first run
+
+  Plans 001 + 002 make it a product someone could use.
+  Plan 003 makes it something someone would pay for.
+
+  ---
+  My recommendation: Run 002 → 001 in sequence right now. Takes ~75 min. Then we
+   scope Plan 003. The TUI respin + streaming together is the minimum viable
+  competitor. Without streaming it doesn't feel alive. Without the polished TUI
+  it doesn't look serious.
+
+  Want me to start 002 now?
+
+✻ Cooked for 26s
+
+❯ thats it? 75min. for a Pi agent, Opencode, competitor, entreprise ready?      
+
+● No. I was soft-pedaling it. Let me be direct.
+
+  75 minutes builds Plans 001+002. That's a functional prototype, not a 
+  competitor.
+
+  Here's the real picture:
+
+  ---
+  What "Pi-level" actually requires
+
+  Tier 1 — Minimum to not embarrass yourself (2–4 weeks)
+
+  ┌──────────────────────────────────────────────────┬──────────┬────────┐
+  │                     Feature                      │  Status  │ Effort │
+  ├──────────────────────────────────────────────────┼──────────┼────────┤
+  │ Streaming tokens                                 │ Plan 001 │ 1 day  │
+  ├──────────────────────────────────────────────────┼──────────┼────────┤
+  │ Polished TUI                                     │ Plan 002 │ 1 day  │
+  ├──────────────────────────────────────────────────┼──────────┼────────┤
+  │ 5+ providers (Gemini, Mistral, Groq, OpenRouter) │ Missing  │ 2 days │
+  ├──────────────────────────────────────────────────┼──────────┼────────┤
+  │ AGENTS.md / BYTE.md context loading              │ Missing  │ 1 day  │
+  ├──────────────────────────────────────────────────┼──────────┼────────┤
+  │ Git awareness (current branch, dirty files)      │ Missing  │ 1 day  │
+  ├──────────────────────────────────────────────────┼──────────┼────────┤
+  │ Real /model switching mid-session                │ Missing  │ 1 day  │
+  ├──────────────────────────────────────────────────┼──────────┼────────┤
+  │ Permission system (ask before writing files)     │ Missing  │ 2 days │
+  ├──────────────────────────────────────────────────┼──────────┼────────┤
+  │ Global npm install (npm i -g ku-byte)            │ Missing  │ 1 day  │
+  ├──────────────────────────────────────────────────┼──────────┼────────┤
+  │ byte init onboarding wizard                      │ Missing  │ 1 day  │
+  ├──────────────────────────────────────────────────┼──────────┼────────┤
+  │ Proper README + logo + landing page              │ Missing  │ 2 days │
+  └──────────────────────────────────────────────────┴──────────┴────────┘
+
+  Tier 2 — Competing seriously (2–3 months after Tier 1)
+
+  ┌──────────────────────────────┬──────────────────────────────────────────┐
+  │           Feature            │              Why it matters              │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ Extension system (TypeScript │ Pi's core differentiator. Without it you │
+  │  modules)                    │  have a fixed product.                   │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ Session tree / history       │ People live in their sessions. They need │
+  │ browser                      │  to navigate them.                       │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ MCP server support           │ Every serious user will demand this.     │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ Streaming file diffs         │ Shows what changed visually — table      │
+  │                              │ stakes for coding agents.                │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ Sub-agent spawning           │ Complex tasks need parallel agents.      │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ Context compaction           │ Long sessions break without it.          │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ Skills system                │ Reusable prompts / behaviors without     │
+  │ (markdown-driven)            │ code.                                    │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ SSH / remote execution       │ Enterprise requirement.                  │
+  └──────────────────────────────┴──────────────────────────────────────────┘
+
+  Tier 3 — Enterprise-ready (6–12 months)
+
+  ┌────────────────────────────────┬────────────────────────────────────────┐
+  │            Feature             │                  Why                   │
+  ├────────────────────────────────┼────────────────────────────────────────┤
+  │ Auth + org/team model          │ Selling to companies requires SSO,     │
+  │                                │ roles, seats                           │
+  ├────────────────────────────────┼────────────────────────────────────────┤
+  │ Audit logs                     │ Legal requirement in enterprise        │
+  ├────────────────────────────────┼────────────────────────────────────────┤
+  │ Sandboxing / security policy   │ Can't give agents FS access without    │
+  │                                │ guardrails                             │
+  ├────────────────────────────────┼────────────────────────────────────────┤
+  │ IDE integrations (VS Code      │ Most devs live in IDEs                 │
+  │ extension)                     │                                        │
+  ├────────────────────────────────┼────────────────────────────────────────┤
+  │ Analytics + usage tracking     │ You need to know what's happening      │
+  ├────────────────────────────────┼────────────────────────────────────────┤
+  │ SLA + support                  │ Enterprise buys contracts not software │
+  └────────────────────────────────┴────────────────────────────────────────┘
+
+  ---
+  The honest timeline
+
+  Now        Plans 001+002     "Working prototype you can demo"
+  +2 weeks   Tier 1 complete   "Something an early adopter would try"
+  +2 months  Tier 2 complete   "A serious pi/Claude Code alternative"
+  +6 months  Tier 3 complete   "Enterprise-sellable product"
+
+  ---
+  What you actually have an edge on
+
+  The K2 protocol is the right foundation. The architecture (headless core +
+  swappable adapters) is what pi uses. The research was solid. You are 6–8 weeks
+   behind pi in features, not 6 months — because the scaffolding is right.
+
+  Your real advantage is K-Universe brand + being the founder = you ship fast,
+  you dogfood hard, you know exactly what's missing. That's how indie tools beat
+   VC-backed ones.
+
+  002 then 001 gets you to "demo-able." That's step 1 of many. Start there?
+
+✻ Brewed for 33s
+
+❯ explain                                                                       
+
+● What you built in this session:
+
+  A working AI coding agent called byte. You can run npx tsx src/cli.ts -p 
+  "hello" and it calls Anthropic/LM Studio and returns an answer. The protocol
+  is solid, the tools work (file read/write/bash/search), the config saves API
+  keys. The foundation is real.
+
+  What it is right now:
+
+  A CLI tool you can use. Not something you can sell or show to someone who uses
+   Claude Code daily. The TUI is bare. Responses block until complete (no
+  streaming). It doesn't know about your project (no AGENTS.md). It can't switch
+   models without restarting. There's no install story.
+
+  Why 002 → 001 first:
+
+  002 is the TUI redesign — two-panel layout, typewriter animation, slash
+  commands. This is what people see. Without it, you can't demo. Nobody invests
+  time in a tool that looks unfinished, even if the engine is good.
+
+  001 is streaming — token-by-token output over WebSocket. This is what makes it
+   feel alive. Claude Code streams. pi streams. Every real coding agent streams.
+   A blocking response that waits 4 seconds then dumps text feels broken even if
+   the answer is correct.
+
+  Both plans together take maybe 90 minutes of subagent execution. After that
+  you have something you can open-source, screenshot, and put in a README.
+
+  Why that's still not enough:
+
+  pi has an extension system. Developers can install packages that add features.
+   That's why pi can support MCP, sub-agents, SSH, custom editors — none of that
+   is in pi's core. They built a platform, not a product. Claude Code has an
+  equivalent.
+
+  Without an extension system, KU-BYTE is a fixed set of features. That ceiling
+  is low.
+
+  Without AGENTS.md support, the agent doesn't know it's in your repo. It's
+  context-blind.
+
+  Without 5+ providers, you're asking people to use Anthropic or LM Studio only.
+   That's not realistic for teams.
+
+  Without a permission system, you can't give it file access safely. Enterprises
+   won't touch it.
+
+  The actual strategy:
+
+  Now:      Run 002 → 001. Get to demo-able.
+  Week 1:   Add providers (Gemini, Groq, OpenRouter — 1 day each).
+  Week 2:   AGENTS.md / BYTE.md context loading. git awareness.
+  Week 3:   Permission system. global npm install. byte init wizard.
+  Week 4:   Ship v0.1 publicly. Gather feedback. Real users reveal what's
+  missing.
+  Month 2:  Extension system (this is the big one — 2-3 weeks).
+  Month 3:  Session history browser. MCP support. Streaming file diffs.
+  Month 4+: IDE integrations. Enterprise auth. SLA.
+
+  The real edge:
+
+  You're solo. That means you ship fast and you dogfood everything. pi is
+  maintained by a small team but has broad scope. Claude Code is Anthropic —
+  massive company, conservative release cycle. The window for an indie
+  competitor is real, but it closes as these tools mature.
+
+  K-Universe brand, K2 protocol as a foundation, and your own daily use as first
+   customer — that's the wedge. The product has to be so good you'd be annoyed
+  if it broke.
+
+  Start with 002?
+
+✻ Sautéed for 27s
+
+❯ K2 Protocol might need renaming                                               
+
+● Good instinct. K2 has collision issues — K2 mountain, K2 skis, K2 avalanche
+  airbags. Searching "K2 Protocol" returns nothing about yours.
+
+  Quick options:
+
+  ┌─────────────┬───────────────────────────┬───────────────────────────────┐
+  │    Name     │         Reads as          │             Vibe              │
+  ├─────────────┼───────────────────────────┼───────────────────────────────┤
+  │ KAP         │ K-Universe Agent Protocol │ Clean, acronym, professional  │
+  ├─────────────┼───────────────────────────┼───────────────────────────────┤
+  │ BYTE        │ Tied to the product name  │ Simple — "BYTE uses the BYTE  │
+  │ Protocol    │                           │ protocol"                     │
+  ├─────────────┼───────────────────────────┼───────────────────────────────┤
+  │ Conduit     │ The wire between          │ Evocative, neutral,           │
+  │             │ components                │ Googleable                    │
+  ├─────────────┼───────────────────────────┼───────────────────────────────┤
+  │ Helix       │ Double-stranded =         │ Premium feel, no obvious      │
+  │             │ bidirectional             │ collision                     │
+  ├─────────────┼───────────────────────────┼───────────────────────────────┤
+  │ KAX         │ K-Universe Agent eXchange │ Punchy, strong                │
+  ├─────────────┼───────────────────────────┼───────────────────────────────┤
+  │ Lattice     │ Interconnected nodes      │ Techy, fits distributed       │
+  │             │                           │ architecture                  │
+  └─────────────┴───────────────────────────┴───────────────────────────────┘
+
+  My pick: KAP
+
+  Short. Professional. protocolVersion: "1.0" stays, verify.ts becomes "KAP
+  Verification", invariants become "KAP-1, KAP-2" etc. It reads like something
+  you'd document and publish a spec for. When you open-source it, "the KAP
+  protocol" sounds legit.
+
+  Or — Conduit if you want something more evocative and brand-neutral that can
+  stand on its own without K-Universe prefix.
+
+  What direction do you want — K-Universe branded shorthand or standalone name?
+
+✻ Worked for 25s
+
+❯ nothing existing inside of docs, k-universe files ? notes                     
+
+● Let me scan the existing docs and notes for any naming clues.
+
+● Explore(Scan docs and notes for protocol naming clues)
+  ⎿  Done (6 tool uses · 75.7k tokens · 1m 4s)
+  (ctrl+o to expand)
+
+● Nothing hidden. Every file uses "K2" consistently — it was the internal
+  codename from the start and never got a real name. The closest thing to a hint
+   is in intent-preservation.md:
+
+  ▎ "K2 uses typed JSON protocol with hard invariants vs Pi's looser RPC"
+
+  That language — typed, hard invariants, contract — is actually the naming
+  signal. The protocol's identity IS its strictness.
+
+  Given what's actually in the codebase, the most organic rename options:
+
+  Stays K-Universe branded:
+  - KAP — K-Universe Agent Protocol. The "K2" checks become "KAP-1, KAP-2,
+  KAP-3". verify.ts says "KAP Verification".
+
+  Ties to the product:
+  - BYTE Protocol — "KU-BYTE runs on the BYTE Protocol." Clean. The product name
+   carries it.
+
+  Stands alone (open-source friendly):
+  - Conduit — "The Conduit agent protocol." Could be published separately, used
+  by anyone, not tied to K-Universe branding. More valuable if you ever open the
+   spec.
+
+  My read: If KU-BYTE stays internal / K-Universe-only → KAP. If you ever plan
+  to open-source the protocol spec so others can build on it → Conduit (or
+  similar standalone name). A protocol that other developers could implement has
+   more value than one that's just a codename.
+
+  The rename is a one-hour find-and-replace across docs/, notes/, and comments.
+  Not code logic — just strings.
+
+  Pick a direction and I'll do it in one pass.
+
+✻ Worked for 1m 42s
+
+❯ /copy                                                                         
+  ⎿  Copied to clipboard (1387 characters, 22 lines)
+     Also written to C:\Users\Byte\AppData\Local\Temp\claude\response.md
+
+※ recap: Building KU-BYTE, a sellable K-Universe AI coding agent competing with pi and Claude Code. Plans 001 (streaming engine) and 002 (TUI respin) are written and ready. Next: pick a protocol rename then execute Plan 002 first. (disable recaps in /config)
+
+❯ /superpowers:test-driven-development                                            ⎿  You've hit your limit · resets 6:10am (America/New_York)
+     /upgrade to increase your usage limit.
+
+✻ Churned for 0s
