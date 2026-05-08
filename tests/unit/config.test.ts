@@ -6,6 +6,9 @@ describe("config", () => {
     const cfg = defaultConfig();
     expect(cfg.defaultModel).toBe("claude-sonnet-4-6");
     expect(cfg.providers.anthropic).toBeUndefined();
+    expect(cfg.defaultProvider).toBe("anthropic");
+    expect(cfg.theme.accentColor).toBe("#0066FF");
+    expect(cfg.providers).toEqual({});
   });
 
   it("validates model string is non-empty", () => {
