@@ -6,6 +6,9 @@ import type {
 } from "../protocol/state.js";
 import type { Command } from "../protocol/commands.js";
 import type { EventStream, AgentEvent } from "../protocol/events.js";
+import type { ModelProvider } from "./models.js";
+import type { ByteTool } from "../tools/index.js";
+import { createRunner } from "./runner.js";
 
 // --- AgentConfig ---
 
@@ -14,6 +17,10 @@ export interface AgentConfig {
   maxConcurrentJobs?: number;
   toolRegistry?: Record<string, (args: unknown) => Promise<unknown>>;
   onEvent?: (event: unknown) => void;
+  provider?: ModelProvider;
+  model?: string;
+  tools?: ByteTool[];
+  systemPrompt?: string;
 }
 
 // --- AgentCore Interface ---
@@ -98,7 +105,89 @@ export function createAgentCore(config: AgentConfig): AgentCore {
     // stub: real impl yields events from internal emitter
   }
 
+  async function* handleSendMessage(
+    sessionId: string,
+    content: string,
+    jobId: JobId
+  ): AsyncGenerator<AgentEvent> {
+    const now = new Date().toISOString();
+
+    yield {
+      type: "JobStarted",
+      jobId,
+      sessionId,
+      toolName: "send_message",
+      timestamp: now,
+    } satisfies AgentEvent;
+
+    if (!config.provider || !config.model) {
+      yield {
+        type: "JobComplete",
+        jobId,
+        sessionId,
+        successful: false,
+        error: "No provider configured on AgentCore",
+        timestamp: new Date().toISOString(),
+      } satisfies AgentEvent;
+      return;
+    }
+
+    const runner = createRunner({
+      provider: config.provider,
+      model: config.model,
+      tools: (config.tools ?? []).map((t) => ({
+        name: t.definition.name,
+        execute: t.execute,
+        definition: {
+          name: t.definition.name,
+          description: t.definition.description,
+          parameters: t.definition.parameters,
+        },
+      })),
+      systemPrompt: config.systemPrompt,
+    });
+
+    try {
+      const response = await runner.sendMessage(content);
+
+      const words = response.content.split(" ");
+      for (const word of words) {
+        yield {
+          type: "TokenChunk",
+          jobId,
+          sessionId,
+          chunk: word + " ",
+          timestamp: new Date().toISOString(),
+        } satisfies AgentEvent;
+      }
+
+      yield {
+        type: "JobComplete",
+        jobId,
+        sessionId,
+        successful: true,
+        result: response.content,
+        timestamp: new Date().toISOString(),
+      } satisfies AgentEvent;
+    } catch (err) {
+      yield {
+        type: "JobComplete",
+        jobId,
+        sessionId,
+        successful: false,
+        error: err instanceof Error ? err.message : String(err),
+        timestamp: new Date().toISOString(),
+      } satisfies AgentEvent;
+    }
+  }
+
   async function executeCommand(cmd: Command): Promise<EventStream> {
+    // Handle SendMessage via runner — returns streaming EventStream
+    if (cmd.type === "SendMessage") {
+      const jobId = generateId("job") as JobId;
+      return handleSendMessage(cmd.sessionId, cmd.content, jobId);
+    }
+
     switch (cmd.type) {
       case "CreateSession":
         await createSession(cmd.config);
