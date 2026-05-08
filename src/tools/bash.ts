@@ -1,11 +1,5 @@
 import { execa } from "execa";
-import { platform } from "os";
 import type { ByteTool } from "./file-read.js";
-
-const isWin = platform() === "win32";
-// On Windows: Git Bash sh.exe is available; use it for POSIX compatibility.
-// Fall back to cmd /c if sh is not found (handled by execa throwing ENOENT).
-const SHELL = isWin ? ["sh", "-c"] : ["sh", "-c"];
 
 export const bashTool: ByteTool = {
   definition: {
@@ -23,22 +17,11 @@ export const bashTool: ByteTool = {
   async execute(args) {
     const command = String(args.command);
     const timeout = typeof args.timeout === "number" ? args.timeout : 30000;
-    try {
-      const result = await execa(SHELL[0], [...SHELL.slice(1), command], {
-        timeout,
-        all: true,
-      });
-      return result.all ?? result.stdout;
-    } catch (err: unknown) {
-      // If sh not found on Windows, fall back to cmd /c
-      if (isWin && err instanceof Error && "code" in err && (err as NodeJS.ErrnoException).code === "ENOENT") {
-        const result = await execa("cmd", ["/c", command], {
-          timeout,
-          all: true,
-        });
-        return result.all ?? result.stdout;
-      }
-      throw err;
-    }
+    const result = await execa(command, {
+      shell: true,
+      timeout,
+      all: true,
+    });
+    return result.all ?? result.stdout;
   },
 };
