@@ -2,7 +2,16 @@
 set -euo pipefail
 
 # Bun cross-compile targets → output filenames
-# These names match the format goreleaser prebuilt expects: <name>_<os>_<arch>
+
+# Stub react-devtools-core — Ink imports it unconditionally but it's only used
+# for the React DevTools browser extension in development. Not needed in
+# production binaries. Creating a minimal stub avoids a missing-module error
+# during Bun cross-compilation without pulling in the full package.
+mkdir -p node_modules/react-devtools-core
+printf '{"name":"react-devtools-core","version":"0.0.0","main":"index.js"}\n' \
+  > node_modules/react-devtools-core/package.json
+printf 'module.exports = { connectToDevTools: () => {}, activate: () => {} };\n' \
+  > node_modules/react-devtools-core/index.js
 
 mkdir -p dist/bins
 
