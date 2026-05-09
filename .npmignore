@@ -1,0 +1,23 @@
+# Source — not needed at runtime
+src/
+tests/
+
+# Docs and dev artifacts
+docs/
+notes/
+source-archive/
+_incoming/
+_removed-after-compile/
+scripts/
+*.goreleaser.yml
+.github/
+install.sh
+
+# TypeScript build outputs excluded by convention
+tsconfig.json
+vitest.config.*
+pnpm-lock.yaml
+
+# Local
+*.local
+.env*
