@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import { loadConfig, setApiKey, setBaseUrl } from "./config.js";
+import { loadConfig, setApiKey, setBaseUrl, addCustomProvider } from "./config.js";
 import { createAnthropicProvider } from "./providers/anthropic/index.js";
 import { createOpenAIProvider } from "./providers/openai/index.js";
 import { createRunner } from "./core/runner.js";
@@ -7,6 +7,48 @@ import { allTools } from "./tools/index.js";
 import type { RunnerTool } from "./core/runner.js";
 import { loadRepoContext } from "./context.js";
 import { runByteInit } from "./init.js";
+import { ProviderRegistry } from "./providers/registry.js";
+import { createOpenAICompatProvider } from "./providers/openai-compat/index.js";
+
+function buildRegistry(cfg: ReturnType<typeof loadConfig>): ProviderRegistry {
+  const registry = new ProviderRegistry();
+
+  registry.register("anthropic", () =>
+    createAnthropicProvider({
+      apiKey: cfg.providers.anthropic?.apiKey ?? process.env["ANTHROPIC_API_KEY"] ?? "",
+    })
+  );
+
+  registry.register("openai", () =>
+    createOpenAIProvider({
+      apiKey: cfg.providers.openai?.apiKey ?? process.env["OPENAI_API_KEY"] ?? "",
+      baseUrl: cfg.providers.openai?.baseUrl,
+    })
+  );
+
+  registry.register("lmstudio", () =>
+    createOpenAICompatProvider({
+      name: "lmstudio",
+      baseUrl: cfg.providers.lmstudio?.baseUrl ?? "http://localhost:19735/v1",
+      apiKey: "lm-studio",
+      models: ["qwen3vl-32b", "gemma-3-27b", "codestral-22b"],
+    })
+  );
+
+  for (const cp of cfg.customProviders ?? []) {
+    registry.register(cp.name, () =>
+      createOpenAICompatProvider({
+        name: cp.name,
+        baseUrl: cp.baseUrl,
+        apiKey: cp.apiKey,
+        oauthToken: cp.oauthToken,
+        models: cp.models,
+      })
+    );
+  }
+
+  return registry;
+}
 
 const program = new Command();
 
@@ -37,6 +79,32 @@ program
   });
 
 program
+  .command("provider:add")
+  .description("Add or update a custom OpenAI-compatible provider")
+  .requiredOption("--name <name>", "Provider name (used with --provider flag)")
+  .requiredOption("--base-url <url>", "OpenAI-compatible API base URL")
+  .requiredOption("--models <models>", "Comma-separated list of model names")
+  .option("--api-key <key>", "API key")
+  .option("--oauth-token <token>", "OAuth bearer token")
+  .action((opts: {
+    name: string;
+    baseUrl: string;
+    models: string;
+    apiKey?: string;
+    oauthToken?: string;
+  }) => {
+    addCustomProvider({
+      name: opts.name,
+      baseUrl: opts.baseUrl,
+      apiKey: opts.apiKey,
+      oauthToken: opts.oauthToken,
+      models: opts.models.split(",").map((m) => m.trim()),
+    });
+    process.stdout.write(`Provider "${opts.name}" saved.\n`);
+    process.stdout.write(`Use: ku-signal --provider ${opts.name} --model ${opts.models.split(",")[0].trim()}\n`);
+  });
+
+program
   .command("init")
   .description("Initialize BYTE.md in the current project directory")
   .action(async () => {
@@ -53,17 +121,8 @@ program
     const model = opts.model ?? cfg.defaultModel;
     const providerName = opts.provider ?? cfg.defaultProvider;
 
-    let provider;
-    if (providerName === "anthropic") {
-      const key = cfg.providers.anthropic?.apiKey ?? process.env["ANTHROPIC_API_KEY"] ?? "";
-      provider = createAnthropicProvider({ apiKey: key });
-    } else if (providerName === "lmstudio") {
-      const baseUrl = cfg.providers.lmstudio?.baseUrl ?? "http://localhost:19735/v1";
-      provider = createOpenAIProvider({ apiKey: "lm-studio", baseUrl });
-    } else {
-      const key = cfg.providers.openai?.apiKey ?? process.env["OPENAI_API_KEY"] ?? "";
-      provider = createOpenAIProvider({ apiKey: key });
-    }
+    const registry = buildRegistry(cfg);
+    const provider = registry.resolve(providerName);
 
     const runnerTools: RunnerTool[] = allTools.map((t) => ({
       name: t.definition.name,
