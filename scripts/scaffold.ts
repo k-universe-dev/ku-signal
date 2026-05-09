@@ -76,7 +76,7 @@ dist/
 *.js.map
 `,
 
-  "README.md": `# K2 Agent Harness
+  "README.md": `# K-Wire agent harness
 
 K-Universe AI coding agent protocol layer.
 
@@ -119,7 +119,7 @@ function runNpmInstall(): void {
 }
 
 console.log("\n ╔══════════════════════════════════════╗");
-console.log("║ K2 Scaffold — Directory Structure ║");
+console.log("║ K-Wire Scaffold — Directory Structure ║");
 console.log("╚══════════════════════════════════════╝\n");
 
 console.log("Creating directories:");

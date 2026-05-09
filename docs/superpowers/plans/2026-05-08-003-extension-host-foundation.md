@@ -703,7 +703,7 @@ Wait — count: 35 existing + 7 (context) + 7 (extensions) + 4 (init) = 53 total
 
 Actually the test count will be 35 + (7 + 7 + 4) = 35 + 18 = 53. Run and check all pass.
 
-- [ ] **Step 9: Run K2 verify**
+- [ ] **Step 9: Run K-Wire verify**
 
 ```bash
 npx tsx scripts/verify.ts
@@ -731,7 +731,7 @@ pnpm test
 # 2. TypeScript
 pnpm typecheck
 
-# 3. K2 invariants
+# 3. K-Wire invariants
 npx tsx scripts/verify.ts
 
 # 4. byte init smoke test

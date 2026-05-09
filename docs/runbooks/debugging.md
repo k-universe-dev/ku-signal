@@ -30,7 +30,7 @@
 3. Apply the fix
 4. Run the test — it must pass
 5. Run the full test suite — no regressions
-6. Run `npm run verify` — all K2 checks pass
+6. Run `npm run verify` — all K-Wire checks pass
 
 ---
 
@@ -41,5 +41,5 @@
 - [ ] Fix applied at the correct layer (protocol, core, adapter)
 - [ ] Test added that catches this specific bug
 - [ ] Full test suite passes
-- [ ] K2 verification passes
+- [ ] K-Wire Verification passes
 - [ ] No silent failures — all errors emit `JobCompleteEvent(successful: false)`

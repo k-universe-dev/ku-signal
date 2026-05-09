@@ -1,4 +1,4 @@
-# K2 Verification Report
+# K-Wire Verification Report
 
 **Date:** 2026-05-07
 **Status:** Fixed
@@ -63,4 +63,4 @@ Run `npm run verify` to check all blockers remain fixed.
 - [x] docs/research/model-provider-matrix.md
 - [x] docs/runbooks/debugging.md
 - [x] docs/runbooks/deployment.md
-- [x] notes/k2-verification-report.md
+- [x] notes/kwire-verification-report.md

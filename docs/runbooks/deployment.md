@@ -7,7 +7,7 @@
 ## Pre-Deploy Checks
 
 - [ ] `npm run build` passes with zero errors
-- [ ] `npm run verify` reports all K2 checks PASS
+- [ ] `npm run verify` reports all K-Wire checks PASS
 - [ ] All tests pass: `npm test`
 - [ ] Version bumped in `package.json`
 - [ ] `CHANGELOG.md` updated

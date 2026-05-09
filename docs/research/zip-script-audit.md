@@ -33,9 +33,9 @@
 
 ---
 
-## `script_1.py` — K2 Verification Script
+## `script_1.py` — K-Wire Verification Script
 
-**Purpose:** Reads the generated ZIP and prints the K2 invariant checks.
+**Purpose:** Reads the generated ZIP and prints the K-Wire invariant checks.
 
 **Behavior:**
 
@@ -56,4 +56,4 @@
 2. Running `script.py` would have written to `output/` in CWD, polluting the project root.
 3. `script_1.py` expects a specific relative path (`output/k2-agent-harness-assets.zip`) and is a Python rewrite of `scripts/verify.ts` — the TS version is canonical.
 
-The K2 invariant checks were instead run inline via PowerShell against the extracted files. All checks pass — see `notes/k2-verification-report.md`.
+The K-Wire invariant checks were instead run inline via PowerShell against the extracted files. All checks pass — see `notes/kwire-verification-report.md`.

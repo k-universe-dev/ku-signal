@@ -29,7 +29,7 @@ print_border_bottom() {
 print_header() {
   echo ""
   print_border
-  echo -e "${DIM}║${RESET} ${BOLD}${WHITE}K2 Agent Harness — Installer v1.0${RESET} ${DIM}║${RESET}"
+  echo -e "${DIM}║${RESET} ${BOLD}${WHITE}K-Wire agent harness — Installer v1.0${RESET} ${DIM}║${RESET}"
   echo -e "${DIM}║${RESET} ${DIM}K-Universe · 2026-05-07${RESET} ${DIM}║${RESET}"
   print_border_bottom
   echo ""
@@ -108,9 +108,9 @@ build_ts() {
 }
 
 run_verify() {
-  print_step "5" "Running K2 verification checks"
+  print_step "5" "Running K-Wire Verification checks"
   if npx ts-node scripts/verify.ts 2>/dev/null; then
-    print_ok "All K2 checks passed"
+    print_ok "All K-Wire checks passed"
   else
     print_warn "Verify script not yet runnable — run manually after build"
   fi

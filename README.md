@@ -1,15 +1,15 @@
 # K-Universe Agent Harness
 
-Typed-protocol coding-agent harness with K2 invariants. Headless core, swappable adapters (CLI / VS Code / socket).
+Typed-protocol coding-agent harness with K-Wire INVARIANTs. Headless core, swappable adapters (CLI / VS Code / socket).
 
-**Status:** Asset bundle recompiled and verified 2026-05-08. K2 invariants 4/4 PASS.
+**Status:** Asset bundle recompiled and verified 2026-05-08. K-Wire INVARIANTs 4/4 PASS.
 
 ## Start here
 
 - [`agent-harness-compiled-asset-bundle.md`](agent-harness-compiled-asset-bundle.md) — navigation index for the whole bundle.
 - [`docs/FRD-001-Agent-Harness.md`](docs/FRD-001-Agent-Harness.md) — what this is and why.
 - [`docs/protocol-spec.md`](docs/protocol-spec.md) — wire format.
-- [`notes/k2-verification-report.md`](notes/k2-verification-report.md) — invariant proof.
+- [`notes/kwire-verification-report.md`](notes/kwire-verification-report.md) — invariant proof.
 - [`notes/intent-preservation.md`](notes/intent-preservation.md) — what was preserved during the recompile.
 
 ## Layout

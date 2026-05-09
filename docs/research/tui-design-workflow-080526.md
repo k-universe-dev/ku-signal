@@ -1,6 +1,6 @@
 # TUI Design Workflow — 2026-05-08
 
-**Source:** Working notes captured during 2026-05-08 session, alongside Pi research and the K2 asset bundle generation.
+**Source:** Working notes captured during 2026-05-08 session, alongside Pi research and the K-Wire asset bundle generation.
 **Purpose:** Record the workflow being used to design the K-Universe TUI aesthetic, and the heuristics chosen for AI-driven layout iteration.
 
 ---
@@ -57,7 +57,7 @@ The K-Universe research deliberately holds **multiple TUI aesthetic experiments 
 
 1. The harness must be **adapter-agnostic** at the protocol level — a single locked aesthetic would leak into core decisions it shouldn't influence.
 2. Different aesthetics surface different protocol gaps (e.g. a dense compact view exposes any `SessionStateSnapshot` field the protocol forgot to expose).
-3. The K2 invariants (typed protocol, no `z.any()`, JobComplete finality) are aesthetic-agnostic by design — proving this means iterating multiple aesthetics against the same core.
+3. The K-Wire INVARIANTs (typed protocol, no `z.any()`, JobComplete finality) are aesthetic-agnostic by design — proving this means iterating multiple aesthetics against the same core.
 
 See `docs/research/tui-aesthetics/` for the individual experiments. They are **not** to be merged into a single "final" aesthetic without an explicit decision recorded in an ADR.
 
@@ -70,7 +70,7 @@ See `docs/research/tui-aesthetics/` for the individual experiments. They are **n
 - **Bubble Tea** (Go) — reference for Elm-style state machines; useful as a _pattern_ even if not used directly.
 - **Textual** (Python) — strong widget library, would require a Python adapter, out of scope.
 
-Default direction for first K2 TUI adapter: **Ink**, because it consumes the existing TS protocol package without an FFI layer.
+Default direction for first K-Wire TUI adapter: **Ink**, because it consumes the existing TS protocol package without an FFI layer.
 
 ---
 

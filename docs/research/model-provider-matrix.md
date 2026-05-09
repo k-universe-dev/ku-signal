@@ -10,7 +10,7 @@
 | **Anthropic** Claude Sonnet 4.6 | 200K tokens | $3.00 / $15.00 | Planned | Best for codebase coherence |
 | **Google** Gemini 3.1 Pro | 1M tokens | $1.25 / $5.00 | Planned | Best multimodal, design-to-code |
 | **Google** Gemini 3.1 Flash | 1M tokens | $0.15 / $0.60 | Planned | Fast, cheap, weak reasoning |
-| **Moonshot** Kimi K2.5 | 256K tokens | $1.00 / $4.00 | Experimental | Strong Chinese + English |
+| **Moonshot** Kimi K-Wire.5 | 256K tokens | $1.00 / $4.00 | Experimental | Strong Chinese + English |
 | **Mistral** Large 2 | 128K tokens | $2.00 / $6.00 | Planned | Good European compliance |
 | **DeepSeek** V3 | 64K tokens | $0.14 / $0.28 | Experimental | Cheapest, good coding |
 | **Meta** Llama 4 Scout | 128K tokens | Self-hosted | Experimental | Open weights, local run |

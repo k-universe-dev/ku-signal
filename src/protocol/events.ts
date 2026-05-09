@@ -13,7 +13,7 @@ export const SessionCreatedSchema = z.object({
 export type SessionCreated = z.infer<typeof SessionCreatedSchema>;
 
 // --- SessionUpdated ---
-// BLOCKER K2-1: state MUST use SessionStateSnapshotSchema — never z.any()
+// BLOCKER KWire-1: state MUST use SessionStateSnapshotSchema — never z.any()
 
 export const SessionUpdatedSchema = z.object({
   type: z.literal("SessionUpdated"),

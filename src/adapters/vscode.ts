@@ -1,5 +1,5 @@
 // VS Code Extension Host Adapter
-// Bridges the K2 agent protocol to VS Code's extension API.
+// Bridges the K-Wire agent protocol to VS Code's extension API.
 // This module must be loaded inside a VS Code extension context.
 
 import { CommandSchema } from "../protocol/commands.js";
@@ -26,7 +26,7 @@ export interface VSCodeAdapter {
  * import { createVSCodeAdapter } from './adapters/vscode.js';
  *
  * export function activate(context: vscode.ExtensionContext) {
- *   const adapter = createVSCodeAdapter({ outputChannelName: 'K2 Agent' });
+ *   const adapter = createVSCodeAdapter({ outputChannelName: 'K-Wire agent' });
  *   context.subscriptions.push({ dispose: adapter.dispose });
  * }
  * ```

@@ -63,15 +63,15 @@ A "core opencode TUI" is a generic terminal UI for arbitrary workflows — panes
 
 ---
 
-## Implications for K-Universe Agent Harness (K2)
+## Implications for K-Universe Agent Harness (K-Wire)
 
-The K2 harness explicitly takes the **opposite stance from Pi on one axis**: it ships a **typed JSON protocol as a hard contract** with K2 invariants:
+The K-Wire harness explicitly takes the **opposite stance from Pi on one axis**: it ships a **typed JSON protocol as a hard contract** with K-Wire INVARIANTs:
 
 1. `protocolVersion: "1.0"` on every command.
 2. `SessionUpdated.state` must be `SessionStateSnapshot`, never `z.any()`.
 3. Every job emits exactly one `JobCompleteEvent` (cancellation = `successful: false`).
 
-K2 keeps Pi's **headless-core / swappable-adapter** model:
+K-Wire keeps Pi's **headless-core / swappable-adapter** model:
 
 - `src/core/` has zero UI imports.
 - `src/protocol/` is the only UI boundary.
@@ -89,8 +89,8 @@ Building a Pi-class harness with mostly AI-driven coding + an FRD is **viable in
 
 ## Open Questions
 
-- Should K2 expose a Pi-style `pi install` packaging surface for skills?
+- Should K-Wire expose a Pi-style `pi install` packaging surface for skills?
 - Is the Pi tree-history pattern worth adopting for session branching?
-- Does the K2 protocol need a "non-Node RPC" mode like Pi's stdin/stdout JSON?
+- Does the K-Wire Protocol need a "non-Node RPC" mode like Pi's stdin/stdout JSON?
 
 These are tracked as separate research, not committed design decisions.

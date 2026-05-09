@@ -26,7 +26,7 @@ export interface SocketAdapter {
 }
 
 export function createSocketAdapter(options: SocketAdapterOptions = {}): SocketAdapter {
-  const { port = 9000, host = "127.0.0.1", path = "/k2" } = options;
+  const { port = 9000, host = "127.0.0.1", path = "/k-wire" } = options;
 
   const httpServer = createServer();
   const wss = new WebSocketServer({ server: httpServer, path });
@@ -103,7 +103,7 @@ export function createSocketAdapter(options: SocketAdapterOptions = {}): SocketA
   async function start(): Promise<void> {
     return new Promise((resolve) => {
       httpServer.listen(port, host, () => {
-        process.stdout.write(`K2 socket adapter listening on ws://${host}:${port}${path}\n`);
+        process.stdout.write(`K-Wire socket adapter listening on ws://${host}:${port}${path}\n`);
         resolve();
       });
     });

@@ -17,18 +17,18 @@ Multiple TUI aesthetic experiments are kept as parallel tracks in `docs/research
 
 ### 3. Pi / OpenClaw / opencode Competitive Research
 
-Captured in `docs/research/pi-tui-competitive-research.md` with explicit notes on which Pi stances K2 adopts (headless core, swappable adapters) and which K2 deliberately diverges from (typed JSON protocol with hard invariants vs Pi's looser RPC).
+Captured in `docs/research/pi-tui-competitive-research.md` with explicit notes on which Pi stances K-Wire adopts (headless core, swappable adapters) and which K-Wire deliberately diverges from (typed JSON protocol with hard invariants vs Pi's looser RPC).
 
-### 4. K2 Verification Invariants
+### 4. K-Wire Verification Invariants
 
-The 4 K2 blocker checks are preserved verbatim:
+The 4 K-Wire BLOCKER checks are preserved verbatim:
 
-- K2-1: `SessionUpdated.state` uses `SessionStateSnapshotSchema`.
-- K2-2: every command schema includes `protocolVersion: z.literal("1.0")`.
-- K2-3: `AgentCore` exposes 5 methods (`createSession`, `destroySession`, `executeCommand`, `invokeTool`, `cancelJob`).
+- KWire-1: `SessionUpdated.state` uses `SessionStateSnapshotSchema`.
+- KWire-2: every command schema includes `protocolVersion: z.literal("1.0")`.
+- KWire-3: `AgentCore` exposes 5 methods (`createSession`, `destroySession`, `executeCommand`, `invokeTool`, `cancelJob`).
 - ARCH: `src/core/models.ts` has zero provider SDK imports.
 
-All 4 pass against the extracted source — see `notes/k2-verification-report.md`.
+All 4 pass against the extracted source — see `notes/kwire-verification-report.md`.
 
 ### 5. Generator Script Knowledge
 
@@ -66,5 +66,5 @@ If two sources disagree on a code block or schema:
 
 1. Real `.ts`/`.md` files extracted from the nested ZIP (in `src/`, `docs/`, `scripts/`, `notes/`) — **highest authority**.
 2. `Perplexity-Generate a complete, exportable asset bundle for t-Response-1-2026-05-08T03-53-25.md` — primary prose reference for verification language and broader context.
-3. `# K-Universe Agent Harness — Complete Asset Scaffo.md` — secondary, especially for K2 blocker context and required asset checklist.
+3. `# K-Universe Agent Harness — Complete Asset Scaffo.md` — secondary, especially for K-Wire BLOCKER context and required asset checklist.
 4. `Perplexity-You are generating the complete asset bundle for t-Response-1-2026-05-08T03-58-19.md` — tertiary fallback only when wording is clearer than the primary.

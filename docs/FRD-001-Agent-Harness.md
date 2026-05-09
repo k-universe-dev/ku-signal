@@ -8,7 +8,7 @@
 
 ## 1. Purpose
 
-Define the functional requirements for the K2 agent harness — the protocol layer, session lifecycle, and tool execution runtime for the K-Universe AI coding agent.
+Define the functional requirements for the K-Wire agent harness — the protocol layer, session lifecycle, and tool execution runtime for the K-Universe AI coding agent.
 
 ---
 

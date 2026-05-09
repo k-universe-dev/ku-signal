@@ -1,4 +1,4 @@
-# Protocol Specification — K2 Agent Harness
+# Protocol Specification — K-Wire agent harness
 
 **Version:** 1.0
 **Date:** 2026-05-07

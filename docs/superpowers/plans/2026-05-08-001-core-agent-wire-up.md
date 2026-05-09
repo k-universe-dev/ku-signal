@@ -4,7 +4,7 @@
 
 **Goal:** Wire the `Runner` (LLM conversation loop) into `AgentCore.executeCommand()` so that socket/WebSocket clients can send `SendMessage` commands and get real LLM responses — and add `TokenChunk` streaming events so responses stream word-by-word.
 
-**Architecture:** `createAgentCore()` accepts an optional `ModelProvider` + tools. When `ExecuteCommand` or `SendMessage` is received it delegates to a `Runner` instance, emitting `TokenChunk` events for each streamed word, then a final `JobComplete`. The socket adapter is patched to properly iterate the returned `EventStream`. All K2 invariants continue to pass.
+**Architecture:** `createAgentCore()` accepts an optional `ModelProvider` + tools. When `ExecuteCommand` or `SendMessage` is received it delegates to a `Runner` instance, emitting `TokenChunk` events for each streamed word, then a final `JobComplete`. The socket adapter is patched to properly iterate the returned `EventStream`. All K-Wire invariants continue to pass.
 
 **Tech Stack:** TypeScript strict, ESM NodeNext, zod (existing), existing runner.ts + providers
 
@@ -100,12 +100,12 @@ export type TokenChunkEvent = z.infer<typeof TokenChunkEventSchema>;
 
 Then add `TokenChunkEventSchema` to the `AgentEventSchema` discriminated union array.
 
-- [ ] **Step 5: Run verify script to confirm K2 invariants still pass**
+- [ ] **Step 5: Run verify script to confirm K-Wire invariants still pass**
 
 ```bash
 npx tsx scripts/verify.ts
 ```
-Expected: 4/4 PASS. (TokenChunk is an event, not a command — K2-2 invariant only checks commands.)
+Expected: 4/4 PASS. (TokenChunk is an event, not a command — KWire-2 invariant only checks commands.)
 
 - [ ] **Step 6: Run the streaming test**
 
@@ -531,7 +531,7 @@ pnpm test
 ```
 Expected: All tests pass.
 
-- [ ] **Step 4: Run K2 verify**
+- [ ] **Step 4: Run K-Wire verify**
 
 ```bash
 npx tsx scripts/verify.ts
@@ -552,7 +552,7 @@ git commit -m "feat(socket): accept ModelProvider config for LLM-enabled WebSock
 After all tasks complete:
 
 ```bash
-# 1. K2 invariants
+# 1. K-Wire invariants
 npx tsx scripts/verify.ts
 
 # 2. All tests

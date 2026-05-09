@@ -7,7 +7,7 @@
 
 ## Context
 
-Sessions are the primary unit of work in K2. A session encapsulates model config, tool registry, and conversation state. The lifecycle must be unambiguous and observable.
+Sessions are the primary unit of work in K-Wire. A session encapsulates model config, tool registry, and conversation state. The lifecycle must be unambiguous and observable.
 
 ---
 

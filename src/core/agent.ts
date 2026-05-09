@@ -24,7 +24,7 @@ export interface AgentConfig {
 }
 
 // --- AgentCore Interface ---
-// BLOCKER K2-2: All 5 methods required exactly as specified.
+// BLOCKER KWire-2: All 5 methods required exactly as specified.
 
 export interface AgentCore {
   /**

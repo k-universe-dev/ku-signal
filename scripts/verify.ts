@@ -30,15 +30,15 @@ function fail(name: string, detail: string): void {
 {
   const content = readFile("src/protocol/events.ts");
   if (!content) {
-    fail("K2-1: events.ts exists", "File not found");
+    fail("KWire-1: events.ts exists", "File not found");
   } else {
     // Look for state: z.any() pattern
     const hasZAnyState = /state:\s*z\.any\(\)/.test(content);
     if (hasZAnyState) {
-      fail("K2-1: SessionUpdated.state typed", "Found state: z.any() — must use SessionStateSnapshotSchema");
+      fail("KWire-1: SessionUpdated.state typed", "Found state: z.any() — must use SessionStateSnapshotSchema");
     } else {
       const hasSnapshotSchema = content.includes("SessionStateSnapshotSchema");
-      pass("K2-1: SessionUpdated.state typed", hasSnapshotSchema ? "Uses SessionStateSnapshotSchema ✔" : "Schema import not detected — verify manually");
+      pass("KWire-1: SessionUpdated.state typed", hasSnapshotSchema ? "Uses SessionStateSnapshotSchema ✔" : "Schema import not detected — verify manually");
     }
   }
 }
@@ -47,16 +47,16 @@ function fail(name: string, detail: string): void {
 {
   const content = readFile("src/protocol/commands.ts");
   if (!content) {
-    fail("K2-3: commands.ts exists", "File not found");
+    fail("KWire-3: commands.ts exists", "File not found");
   } else {
     const schemaMatches = content.matchAll(/z\.object\(\{/g);
     const objectCount = Array.from(schemaMatches).length;
     const protocolVersionCount = (content.match(/protocolVersion:\s*z\.literal\("1\.0"\)/g) || []).length;
 
     if (protocolVersionCount >= objectCount && protocolVersionCount > 0) {
-      pass("K2-3: protocolVersion in commands", `${protocolVersionCount} schemas with protocolVersion ✔`);
+      pass("KWire-3: protocolVersion in commands", `${protocolVersionCount} schemas with protocolVersion ✔`);
     } else {
-      fail("K2-3: protocolVersion in commands", `Found ${protocolVersionCount} protocolVersion fields for ${objectCount} z.object() blocks`);
+      fail("KWire-3: protocolVersion in commands", `Found ${protocolVersionCount} protocolVersion fields for ${objectCount} z.object() blocks`);
     }
   }
 }
@@ -86,7 +86,7 @@ function fail(name: string, detail: string): void {
 {
   const content = readFile("src/core/agent.ts");
   if (!content) {
-    fail("K2-2: agent.ts exists", "File not found");
+    fail("KWire-2: agent.ts exists", "File not found");
   } else {
     const requiredMethods = [
       "createSession",
@@ -99,9 +99,9 @@ function fail(name: string, detail: string): void {
     const missing = requiredMethods.filter((m) => !content.includes(m));
 
     if (missing.length === 0) {
-      pass("K2-2: AgentCore methods", `All 5 methods present ✔`);
+      pass("KWire-2: AgentCore methods", `All 5 methods present ✔`);
     } else {
-      fail("K2-2: AgentCore methods", `Missing: ${missing.join(", ")}`);
+      fail("KWire-2: AgentCore methods", `Missing: ${missing.join(", ")}`);
     }
   }
 }
@@ -109,7 +109,7 @@ function fail(name: string, detail: string): void {
 // ─── Report ───────────────────────────────────────────────────
 
 console.log("\n╔══════════════════════════════════════════════════╗");
-console.log("║ K2 Verification Report                          ║");
+console.log("║ K-Wire Verification Report                          ║");
 console.log("╚══════════════════════════════════════════════════╝\n");
 
 let passed = 0;

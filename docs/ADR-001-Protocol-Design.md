@@ -7,7 +7,7 @@
 
 ## Context
 
-The K2 agent harness needs a typed wire protocol between core and adapters. Commands and events must be validated at runtime and discriminated at compile time.
+The K-Wire agent harness needs a typed wire protocol between core and adapters. Commands and events must be validated at runtime and discriminated at compile time.
 
 ---
 
