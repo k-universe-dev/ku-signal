@@ -3,12 +3,22 @@ import { z } from "zod";
 
 export const ByteConfigSchema = z.object({
   defaultModel: z.string().min(1),
-  defaultProvider: z.enum(["anthropic", "openai", "lmstudio"]),
+  defaultProvider: z.string().min(1),
   providers: z.object({
     anthropic: z.object({ apiKey: z.string().min(1) }).optional(),
     openai: z.object({ apiKey: z.string().min(1), baseUrl: z.string().url().optional() }).optional(),
     lmstudio: z.object({ baseUrl: z.string().url() }).optional(),
   }),
+  customProviders: z.array(
+    z.object({
+      name: z.string().min(1),
+      baseUrl: z.string().url(),
+      apiKey: z.string().optional(),
+      oauthToken: z.string().optional(),
+      oauthExpiresAt: z.number().optional(),
+      models: z.array(z.string().min(1)).min(1),
+    })
+  ).default([]),
   theme: z.object({
     accentColor: z.string().default("#0066FF"),
   }).default({}),
@@ -29,6 +39,7 @@ export function defaultConfig(): ByteConfig {
     defaultModel: "claude-sonnet-4-6",
     defaultProvider: "anthropic",
     providers: {},
+    customProviders: [],
     theme: { accentColor: "#0066FF" },
     extensions: [],
   };
@@ -59,5 +70,29 @@ export function setApiKey(provider: "anthropic" | "openai", key: string): void {
 export function setBaseUrl(baseUrl: string): void {
   const cfg = loadConfig();
   cfg.providers.lmstudio = { baseUrl };
+  saveConfig(cfg);
+}
+
+export function addCustomProvider(opts: {
+  name: string;
+  baseUrl: string;
+  apiKey?: string;
+  oauthToken?: string;
+  models: string[];
+}): void {
+  const cfg = loadConfig();
+  const existing = cfg.customProviders.findIndex((p) => p.name === opts.name);
+  const entry = {
+    name: opts.name,
+    baseUrl: opts.baseUrl,
+    apiKey: opts.apiKey,
+    oauthToken: opts.oauthToken,
+    models: opts.models,
+  };
+  if (existing >= 0) {
+    cfg.customProviders[existing] = entry;
+  } else {
+    cfg.customProviders.push(entry);
+  }
   saveConfig(cfg);
 }
