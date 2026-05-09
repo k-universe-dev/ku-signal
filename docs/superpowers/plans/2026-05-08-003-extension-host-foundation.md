@@ -692,7 +692,7 @@ npx tsx src/cli.ts -p "What project context do you have?" --provider lmstudio
 ```
 (LM Studio test — context will appear if loaded. Skip if LM Studio not running.)
 
-- [ ] **Step 8: Run full test suite**
+- [x] **Step 8: Run full test suite**
 
 ```bash
 pnpm test
@@ -703,14 +703,14 @@ Wait — count: 35 existing + 7 (context) + 7 (extensions) + 4 (init) = 53 total
 
 Actually the test count will be 35 + (7 + 7 + 4) = 35 + 18 = 53. Run and check all pass.
 
-- [ ] **Step 9: Run K-Wire verify**
+- [x] **Step 9: Run K-Wire verify**
 
 ```bash
 npx tsx scripts/verify.ts
 ```
 Expected: 4/4 PASS.
 
-- [ ] **Step 10: Commit**
+- [x] **Step 10: Commit**
 
 ```bash
 git add src/cli.ts
