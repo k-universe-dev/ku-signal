@@ -1,7 +1,7 @@
 import Conf from "conf";
 import { z } from "zod";
 
-const ByteConfigSchema = z.object({
+export const ByteConfigSchema = z.object({
   defaultModel: z.string().min(1),
   defaultProvider: z.enum(["anthropic", "openai", "lmstudio"]),
   providers: z.object({
@@ -13,6 +13,13 @@ const ByteConfigSchema = z.object({
     accentColor: z.string().default("#0066FF"),
   }).default({}),
   sessionDir: z.string().optional(),
+  extensions: z.array(
+    z.object({
+      name: z.string().min(1),
+      enabled: z.boolean().default(true),
+      path: z.string().optional(),
+    })
+  ).default([]),
 });
 
 export type ByteConfig = z.infer<typeof ByteConfigSchema>;
@@ -23,6 +30,7 @@ export function defaultConfig(): ByteConfig {
     defaultProvider: "anthropic",
     providers: {},
     theme: { accentColor: "#0066FF" },
+    extensions: [],
   };
 }
 
