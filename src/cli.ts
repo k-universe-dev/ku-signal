@@ -5,6 +5,8 @@ import { createOpenAIProvider } from "./providers/openai/index.js";
 import { createRunner } from "./core/runner.js";
 import { allTools } from "./tools/index.js";
 import type { RunnerTool } from "./core/runner.js";
+import { loadRepoContext } from "./context.js";
+import { runByteInit } from "./init.js";
 
 const program = new Command();
 
@@ -35,6 +37,13 @@ program
   });
 
 program
+  .command("init")
+  .description("Initialize BYTE.md in the current project directory")
+  .action(async () => {
+    await runByteInit(process.cwd());
+  });
+
+program
   .argument("[prompt]", "One-shot prompt (omit to enter interactive TUI)")
   .option("-m, --model <model>", "Model to use")
   .option("-p, --print", "Print mode: output raw text, no TUI")
@@ -62,12 +71,21 @@ program
       definition: t.definition,
     }));
 
+    const repoContext = await loadRepoContext(process.cwd());
+
+    const systemPromptParts = [
+      "You are BYTE, a K-Universe AI coding agent. Help the user with coding tasks. Be concise and direct.",
+    ];
+    if (repoContext) {
+      systemPromptParts.push("\n\n" + repoContext);
+    }
+    const systemPrompt = systemPromptParts.join("");
+
     const runner = createRunner({
       provider,
       model,
       tools: runnerTools,
-      systemPrompt:
-        "You are BYTE, a K-Universe AI coding agent. Help the user with coding tasks. Be concise and direct.",
+      systemPrompt,
     });
 
     if (prompt) {
