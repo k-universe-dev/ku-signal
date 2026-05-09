@@ -1,0 +1,84 @@
+# .goreleaser.yml
+version: 2
+
+project_name: ku-signal
+
+before:
+  hooks:
+    - bash scripts/build-binaries.sh
+
+builds:
+  - id: ku-signal
+    binary: ku-signal
+    builder: prebuilt
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: windows
+        goarch: arm64
+    prebuilt:
+      path: "dist/bins/ku-signal_{{ .Os }}_{{ .Arch }}{{ .Ext }}"
+
+archives:
+  - id: default
+    name_template: "ku-signal_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+
+checksum:
+  name_template: "checksums.txt"
+
+release:
+  github:
+    owner: k-universe-dev
+    name: ku-signal
+  draft: false
+  prerelease: auto
+
+brews:
+  - name: ku-signal
+    repository:
+      owner: k-universe-dev
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+    directory: Formula
+    homepage: "https://github.com/k-universe-dev/ku-signal"
+    description: "KU-Signal — K-Universe agent coordination engine (K-Wire protocol)"
+    license: "MIT"
+    test: |
+      system "#{bin}/ku-signal", "--version"
+    install: |
+      bin.install "ku-signal"
+
+aurs:
+  - name: ku-signal-bin
+    homepage: "https://github.com/k-universe-dev/ku-signal"
+    description: "KU-Signal — K-Universe agent coordination engine (K-Wire protocol)"
+    license: MIT
+    private_key: "{{ .Env.AUR_PRIVATE_KEY }}"
+    git_url: "ssh://aur@aur.archlinux.org/ku-signal-bin.git"
+    package: |-
+      install -Dm755 "./ku-signal" "${pkgdir}/usr/bin/ku-signal"
+
+nfpms:
+  - id: ku-signal-pkg
+    file_name_template: "ku-signal_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    homepage: "https://github.com/k-universe-dev/ku-signal"
+    description: "KU-Signal — K-Universe agent coordination engine"
+    maintainer: "K-Universe Dev <k-universe-dev@users.noreply.github.com>"
+    license: MIT
+    formats:
+      - deb
+      - rpm
+      - apk
+    contents:
+      - src: "./ku-signal"
+        dst: "/usr/bin/ku-signal"
+        file_info:
+          mode: 0755
