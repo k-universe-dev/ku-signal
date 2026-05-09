@@ -1,34 +1,137 @@
-# K-Universe Agent Harness
+# KU-Signal
 
-Typed-protocol coding-agent harness with K-Wire INVARIANTs. Headless core, swappable adapters (CLI / VS Code / socket).
+**K-Universe agent coordination engine.** Typed K-Wire protocol, headless AgentCore, swappable adapters (CLI / TUI / VS Code / WebSocket).
 
-**Status:** Asset bundle recompiled and verified 2026-05-08. K-Wire INVARIANTs 4/4 PASS.
+[![npm](https://img.shields.io/npm/v/@ku/signal)](https://www.npmjs.com/package/@ku/signal)
 
-## Start here
+---
 
-- [`agent-harness-compiled-asset-bundle.md`](agent-harness-compiled-asset-bundle.md) — navigation index for the whole bundle.
-- [`docs/FRD-001-Agent-Harness.md`](docs/FRD-001-Agent-Harness.md) — what this is and why.
-- [`docs/protocol-spec.md`](docs/protocol-spec.md) — wire format.
-- [`notes/kwire-verification-report.md`](notes/kwire-verification-report.md) — invariant proof.
-- [`notes/intent-preservation.md`](notes/intent-preservation.md) — what was preserved during the recompile.
+## Install
 
-## Layout
+### npm / pnpm / bun (recommended)
 
-| Path                      | Purpose                                                                       |
-| ------------------------- | ----------------------------------------------------------------------------- |
-| `src/protocol/`           | Typed Zod schemas. Only UI boundary.                                          |
-| `src/core/`               | Headless agent core. Zero UI imports.                                         |
-| `src/adapters/`           | CLI, socket, VS Code. Consume protocol only.                                  |
-| `scripts/`                | `install.sh`, `scaffold.ts`, `verify.ts`.                                     |
-| `docs/`                   | FRD, protocol spec, ADRs, runbooks.                                           |
-| `docs/research/`          | Pi/opencode competitive research, TUI design workflow, aesthetic experiments. |
-| `notes/`                  | Verification report, preservation intent.                                     |
-| `source-archive/`         | Original 8 markdown exports — preserved untouched.                            |
-| `_incoming/`              | Raw extracted ZIP contents for traceability.                                  |
-| `_removed-after-compile/` | 2 quarantined duplicates. Not deleted.                                        |
+```bash
+bun install -g @ku/signal
+npm install -g @ku/signal
+pnpm install -g @ku/signal
+```
 
-## Verify
+### curl (binary — macOS / Linux)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/k-universe-dev/ku-signal/main/install.sh | bash
+```
+
+### Homebrew (macOS / Linux)
+
+```bash
+brew tap k-universe-dev/tap
+brew install ku-signal
+```
+
+### AUR (Arch Linux)
+
+```bash
+paru -S ku-signal-bin
+# or
+yay -S ku-signal-bin
+```
+
+### Windows
 
 ```powershell
-bun run scripts/verify.ts
+bun install -g @ku/signal
 ```
+
+---
+
+## AI Coding Tools
+
+### Claude Code
+
+```bash
+claude mcp add ku-signal -- npx -y @ku/signal
+```
+
+### OpenCode
+
+```bash
+opencode mcp add ku-signal -- npx -y @ku/signal
+```
+
+### Cursor
+
+Add to `~/.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "ku-signal": {
+      "command": "npx",
+      "args": ["-y", "@ku/signal"]
+    }
+  }
+}
+```
+
+### Windsurf
+
+Add to `~/.windsurf/mcp_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "ku-signal": {
+      "command": "npx",
+      "args": ["-y", "@ku/signal"]
+    }
+  }
+}
+```
+
+### All tools at once (agent-add)
+
+```bash
+npx -y agent-add \
+  --mcp '{"server":{"command":"npx","args":["-y","@ku/signal"]}}' \
+  --target cursor,claude,opencode,windsurf
+```
+
+---
+
+## Quick start
+
+```bash
+ku-signal --help
+ku-signal init          # create BYTE.md in current project
+ku-signal config --set-anthropic-key sk-...
+ku-signal               # launch TUI
+ku-signal -p "Hello"    # one-shot print mode
+```
+
+---
+
+## K-Wire Invariants
+
+```bash
+npx tsx scripts/verify.ts
+```
+
+Expected: 4/4 PASS — KWire-1, KWire-2, KWire-3, ARCH.
+
+---
+
+## Architecture
+
+| Path | Purpose |
+|---|---|
+| `src/protocol/` | Typed Zod schemas — K-Wire protocol |
+| `src/core/` | Headless AgentCore + Runner |
+| `src/adapters/` | CLI, socket, TUI (Ink), VS Code |
+| `src/providers/` | Anthropic, OpenAI/LM Studio |
+| `src/tools/` | file_read, file_write, bash, search |
+| `src/extensions/` | Extension manifest schema + discovery |
+
+## License
+
+MIT — K-Universe Dev
