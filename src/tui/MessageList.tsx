@@ -37,7 +37,7 @@ function AssistantMessage({ content, animate }: AssistantMessageProps): React.Re
 
   return (
     <Box flexDirection="column" marginBottom={1}>
-      <Text color="greenBright" bold>byte</Text>
+      <Text color="greenBright" bold>ku-signal</Text>
       <Text wrap="wrap">{visible}{animate && frame < content.length ? "▌" : ""}</Text>
     </Box>
   );
@@ -52,7 +52,7 @@ export function MessageList({ messages, loading }: MessageListProps): React.Reac
   if (messages.length === 0) {
     return (
       <Box flexGrow={1} paddingX={1} paddingTop={1}>
-        <Text dimColor>Start typing to talk to BYTE...</Text>
+        <Text dimColor>Start typing to talk to KU-Signal...</Text>
       </Box>
     );
   }
@@ -81,7 +81,7 @@ export function MessageList({ messages, loading }: MessageListProps): React.Reac
       })}
       {loading && (
         <Box>
-          <Text color="yellow" dimColor>byte is thinking...</Text>
+          <Text color="yellow" dimColor>ku-signal is thinking...</Text>
         </Box>
       )}
     </Box>

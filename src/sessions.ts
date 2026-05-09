@@ -20,7 +20,7 @@ const SessionFileSchema = z.object({
 export type SessionFile = z.infer<typeof SessionFileSchema>;
 
 function sessionsDir(): string {
-  return join(homedir(), "AppData", "Roaming", "byte", "sessions");
+  return join(homedir(), "AppData", "Roaming", "ku-signal", "sessions");
 }
 
 export function newSessionId(): string {

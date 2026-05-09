@@ -5,9 +5,9 @@ import { ExtensionManifestSchema, type ExtensionManifest } from "./manifest.js";
 
 export function extensionsDir(): string {
   if (platform() === "win32") {
-    return join(homedir(), "AppData", "Roaming", "byte", "extensions");
+    return join(homedir(), "AppData", "Roaming", "ku-signal", "extensions");
   }
-  return join(homedir(), ".config", "byte", "extensions");
+  return join(homedir(), ".config", "ku-signal", "extensions");
 }
 
 export async function discoverExtensions(): Promise<ExtensionManifest[]> {

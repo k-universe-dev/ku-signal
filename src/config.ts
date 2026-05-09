@@ -34,7 +34,7 @@ export function defaultConfig(): ByteConfig {
   };
 }
 
-const store = new Conf<ByteConfig>({ projectName: "byte", defaults: defaultConfig() });
+const store = new Conf<ByteConfig>({ projectName: "ku-signal", defaults: defaultConfig() });
 
 export function loadConfig(): ByteConfig {
   try {

@@ -14,7 +14,7 @@ export default function Header({ model, provider, messageCount }: HeaderProps): 
       <Box flexGrow={1}>
         <Text color="blueBright" bold>KU</Text>
         <Text bold>·</Text>
-        <Text bold>BYTE</Text>
+        <Text bold>Signal</Text>
       </Box>
       <Box>
         <Text dimColor>{model} @ {provider}</Text>

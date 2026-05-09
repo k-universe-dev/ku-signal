@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { execa } from "execa";
 
-describe("byte CLI integration", () => {
+describe("ku-signal CLI integration", () => {
   it("--version prints 0.1.0", async () => {
     const result = await execa("npx", ["tsx", "src/cli.ts", "--version"], {
       cwd: process.cwd(),
@@ -9,11 +9,11 @@ describe("byte CLI integration", () => {
     expect(result.stdout.trim()).toBe("0.1.0");
   });
 
-  it("--help prints KU-BYTE description", async () => {
+  it("--help prints KU-Signal description", async () => {
     const result = await execa("npx", ["tsx", "src/cli.ts", "--help"], {
       cwd: process.cwd(),
     });
-    expect(result.stdout).toContain("byte");
+    expect(result.stdout).toContain("ku-signal");
     expect(result.stdout).toContain("K-Universe");
   });
 

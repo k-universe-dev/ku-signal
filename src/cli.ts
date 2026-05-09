@@ -11,13 +11,13 @@ import { runByteInit } from "./init.js";
 const program = new Command();
 
 program
-  .name("byte")
-  .description("KU-BYTE — K-Universe AI coding agent")
+  .name("ku-signal")
+  .description("KU-Signal — K-Universe agent coordination engine")
   .version("0.1.0");
 
 program
   .command("config")
-  .description("Configure byte settings")
+  .description("Configure ku-signal settings")
   .option("--set-anthropic-key <key>", "Set Anthropic API key")
   .option("--set-openai-key <key>", "Set OpenAI API key")
   .option("--set-lmstudio-url <url>", "Set LM Studio base URL")
@@ -74,7 +74,7 @@ program
     const repoContext = await loadRepoContext(process.cwd());
 
     const systemPromptParts = [
-      "You are BYTE, a K-Universe AI coding agent. Help the user with coding tasks. Be concise and direct.",
+      "You are KU-Signal, a K-Universe agent coordination engine. Help the user with coding tasks. Be concise and direct.",
     ];
     if (repoContext) {
       systemPromptParts.push("\n\n" + repoContext);

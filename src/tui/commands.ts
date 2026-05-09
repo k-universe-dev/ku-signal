@@ -5,7 +5,7 @@ export interface SlashCommand {
 }
 
 export const SLASH_COMMANDS: Record<string, { hint: string }> = {
-  exit:    { hint: "quit byte" },
+  exit:    { hint: "quit ku-signal" },
   clear:   { hint: "clear conversation" },
   model:   { hint: "switch model: /model <name>" },
   tools:   { hint: "list available tools" },
