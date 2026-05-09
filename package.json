@@ -1,19 +1,27 @@
 {
-  "name": "ku-byte",
+  "name": "@ku/signal",
   "version": "0.1.0",
-  "private": true,
+  "description": "KU-Signal — K-Universe agent coordination engine",
   "type": "module",
   "bin": {
-    "byte": "./dist/cli.js"
+    "ku-signal": "./bin/ku-signal.mjs"
+  },
+  "files": [
+    "bin/",
+    "dist/",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/cli.ts",
-    "byte": "tsx src/cli.ts",
     "verify": "tsx scripts/verify.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm typecheck && pnpm build"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.52.0",
@@ -38,5 +46,11 @@
     "tsx": "^4.19.0",
     "typescript": "^5.4.0",
     "vitest": "^2.1.0"
-  }
+  },
+  "homepage": "https://github.com/k-universe-dev/ku-signal",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/k-universe-dev/ku-signal.git"
+  },
+  "license": "MIT"
 }

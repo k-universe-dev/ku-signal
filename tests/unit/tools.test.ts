@@ -33,7 +33,7 @@ describe("tools", () => {
 
   it("fileReadTool reads a real file", async () => {
     const result = await fileReadTool.execute({ path: "package.json" });
-    expect(result).toContain("ku-byte");
+    expect(result).toContain("@ku/signal");
   });
 
   it("bashTool runs echo command", async () => {
