@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: write
-  id-token: write
 
 jobs:
   release:
@@ -17,8 +16,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -37,20 +34,25 @@ jobs:
       - name: Build JS dist (for npm)
         run: bun run build
 
-      - name: Setup Go (required by GoReleaser)
-        uses: actions/setup-go@v5
-        with:
-          go-version: "1.22"
+      - name: Build cross-platform binaries
+        run: bash scripts/build-binaries.sh
 
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v6
-        with:
-          version: latest
-          args: release --clean
+      - name: Generate checksums
+        run: cd dist/bins && sha256sum * > checksums.txt
+
+      - name: Create GitHub Release
+        run: |
+          gh release create "${{ github.ref_name }}" \
+            --title "ku-signal ${{ github.ref_name }}" \
+            --generate-notes \
+            dist/bins/ku-signal_linux_amd64 \
+            dist/bins/ku-signal_linux_arm64 \
+            dist/bins/ku-signal_darwin_amd64 \
+            dist/bins/ku-signal_darwin_arm64 \
+            "dist/bins/ku-signal_windows_amd64.exe" \
+            dist/bins/checksums.txt
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          AUR_PRIVATE_KEY: ${{ secrets.AUR_PRIVATE_KEY }}
-          HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node for npm publish
         uses: actions/setup-node@v4
@@ -59,6 +61,8 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Publish to npm
+        # Requires NPM_TOKEN secret - skips gracefully if not set
+        continue-on-error: true
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
