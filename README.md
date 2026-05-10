@@ -2,7 +2,7 @@
 
 **K-Universe agent coordination engine.** Typed K-Wire protocol, headless AgentCore, swappable adapters (CLI / TUI / VS Code / WebSocket).
 
-[![npm](https://img.shields.io/npm/v/@ku/signal)](https://www.npmjs.com/package/@ku/signal)
+[![npm](https://img.shields.io/npm/v/@k-universe/signal)](https://www.npmjs.com/package/@k-universe/signal)
 
 ---
 
@@ -11,9 +11,10 @@
 ### npm / pnpm / bun (recommended)
 
 ```bash
-bun install -g @ku/signal
-npm install -g @ku/signal
-pnpm install -g @ku/signal
+bun install -g @k-universe/signal
+/signal
+npm install -g @k-universe/signal
+pnpm install -g @k-universe/signal
 ```
 
 ### curl (binary — macOS / Linux)
@@ -40,7 +41,7 @@ yay -S ku-signal-bin
 ### Windows
 
 ```powershell
-bun install -g @ku/signal
+bun install -g @k-universe/signal
 ```
 
 ---
@@ -50,13 +51,13 @@ bun install -g @ku/signal
 ### Claude Code
 
 ```bash
-claude mcp add ku-signal -- npx -y @ku/signal
+claude mcp add ku-signal -- npx -y @k-universe/signal
 ```
 
 ### OpenCode
 
 ```bash
-opencode mcp add ku-signal -- npx -y @ku/signal
+opencode mcp add ku-signal -- npx -y @k-universe/signal
 ```
 
 ### Cursor
@@ -68,7 +69,7 @@ Add to `~/.cursor/mcp.json`:
   "mcpServers": {
     "ku-signal": {
       "command": "npx",
-      "args": ["-y", "@ku/signal"]
+      "args": ["-y", "@k-universe/signal"]
     }
   }
 }
@@ -83,7 +84,7 @@ Add to `~/.windsurf/mcp_config.json`:
   "mcpServers": {
     "ku-signal": {
       "command": "npx",
-      "args": ["-y", "@ku/signal"]
+      "args": ["-y", "@k-universe/signal"]
     }
   }
 }
@@ -93,7 +94,7 @@ Add to `~/.windsurf/mcp_config.json`:
 
 ```bash
 npx -y agent-add \
-  --mcp '{"server":{"command":"npx","args":["-y","@ku/signal"]}}' \
+  --mcp '{"server":{"command":"npx","args":["-y","@k-universe/signal"]}}' \
   --target cursor,claude,opencode,windsurf
 ```
 

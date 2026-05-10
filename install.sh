@@ -22,7 +22,7 @@ esac
 case "$OS" in
   linux|darwin) ;;
   *)
-    echo "Unsupported OS: $OS. On Windows, use: bun install -g @ku/signal" >&2
+    echo "Unsupported OS: $OS. On Windows, use: bun install -g @k-universe/signal" >&2
     exit 1
     ;;
 esac
