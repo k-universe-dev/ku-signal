@@ -1,6 +1,6 @@
 {
   "name": "@ku/signal",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "KU-Signal — K-Universe agent coordination engine",
   "type": "module",
   "bin": {
