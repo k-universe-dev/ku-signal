@@ -1,4 +1,5 @@
 import type { ByteConfig } from "./config.js";
+import type { ByteTool } from "./tools/index.js";
 
 export type PermissionDecision = "yes" | "no" | "always";
 export type RequestPermission = (tool: string, summary: string) => Promise<PermissionDecision>;
@@ -31,8 +32,6 @@ export function summarizeTool(toolName: string, args: Record<string, unknown>): 
   }
   return toolName;
 }
-
-import type { ByteTool } from "./tools/index.js";
 
 const GUARDED_TOOLS = new Set(["file_write", "bash"]);
 

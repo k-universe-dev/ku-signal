@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { ByteConfigSchema, defaultConfig } from "../../src/config.js";
-import { isAlwaysAllowed, addAlwaysPermission } from "../../src/permissions.js";
+import { isAlwaysAllowed, addAlwaysPermission, wrapWithPermission } from "../../src/permissions.js";
+import type { ByteTool } from "../../src/tools/index.js";
 
 describe("permission config", () => {
   it("ByteConfigSchema accepts permissions array", () => {
@@ -42,9 +43,6 @@ describe("permission config", () => {
   });
 });
 
-import { wrapWithPermission } from "../../src/permissions.js";
-import type { ByteTool } from "../../src/tools/index.js";
-
 describe("wrapWithPermission", () => {
   const fakeTool = (name: string): ByteTool => ({
     definition: { name, description: name, parameters: { type: "object", properties: {}, required: [] } },
@@ -77,7 +75,7 @@ describe("wrapWithPermission", () => {
   it("guarded tool throws when requestPermission returns 'no'", async () => {
     const tools = [fakeTool("bash")];
     const wrapped = wrapWithPermission(tools, async () => "no", { ...defaultConfig(), permissions: [] });
-    await expect(wrapped[0].execute({ command: "rm -rf /" })).rejects.toThrow("Permission denied");
+    await expect(wrapped[0].execute({ command: "rm -rf /" })).rejects.toThrow("Permission denied for bash");
   });
 
   it("guarded tool skips requestPermission when tool is always-allowed", async () => {
