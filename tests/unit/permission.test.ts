@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { ByteConfigSchema, defaultConfig } from "../../src/config.js";
-import { isAlwaysAllowed, saveAlwaysPermission } from "../../src/permissions.js";
+import { isAlwaysAllowed, addAlwaysPermission } from "../../src/permissions.js";
 
 describe("permission config", () => {
   it("ByteConfigSchema accepts permissions array", () => {
@@ -30,13 +30,14 @@ describe("permission config", () => {
     expect(isAlwaysAllowed("file_write", cfg)).toBe(true);
   });
 
-  it("saveAlwaysPermission adds entry and deduplicates", () => {
+  it("addAlwaysPermission adds entry and deduplicates", () => {
     const cfg = defaultConfig();
-    const updated = saveAlwaysPermission("bash", cfg);
+    const updated = addAlwaysPermission("bash", cfg);
     expect(updated.permissions).toHaveLength(1);
     expect(updated.permissions[0].tool).toBe("bash");
+    expect(cfg.permissions).toHaveLength(0); // original unmodified
 
-    const again = saveAlwaysPermission("bash", updated);
+    const again = addAlwaysPermission("bash", updated);
     expect(again.permissions).toHaveLength(1);
   });
 });

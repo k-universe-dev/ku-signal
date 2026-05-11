@@ -7,7 +7,7 @@ export function isAlwaysAllowed(tool: string, cfg: Pick<ByteConfig, "permissions
   return cfg.permissions.some((p) => p.tool === tool && p.decision === "always");
 }
 
-export function saveAlwaysPermission(
+export function addAlwaysPermission(
   tool: string,
   cfg: ByteConfig
 ): ByteConfig {
