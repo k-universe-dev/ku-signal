@@ -9,6 +9,8 @@ import { loadRepoContext } from "./context.js";
 import { runByteInit } from "./init.js";
 import { ProviderRegistry } from "./providers/registry.js";
 import { createOpenAICompatProvider } from "./providers/openai-compat/index.js";
+import { wrapWithPermission } from "./permissions.js";
+import type { RequestPermission } from "./permissions.js";
 
 function buildRegistry(cfg: ReturnType<typeof loadConfig>): ProviderRegistry {
   const registry = new ProviderRegistry();
@@ -124,7 +126,17 @@ program
     const registry = buildRegistry(cfg);
     const provider = registry.resolve(providerName);
 
-    const runnerTools: RunnerTool[] = allTools.map((t) => ({
+    // Mutable ref — App registers its real callback on mount; fallback auto-allows (safe for print mode)
+    const permissionRef: { current: RequestPermission } = {
+      current: async () => "yes",
+    };
+    const requestPermission: RequestPermission = (tool, summary) =>
+      permissionRef.current(tool, summary);
+
+    // Wrap destructive tools (file_write, bash) with permission gate
+    const guardedTools = wrapWithPermission(allTools, requestPermission, cfg);
+
+    const runnerTools: RunnerTool[] = guardedTools.map((t) => ({
       name: t.definition.name,
       execute: t.execute.bind(t),
       definition: t.definition,
@@ -154,7 +166,14 @@ program
     }
 
     const { startTUI } = await import("./adapters/tui.js");
-    await startTUI({ runner, model, providerName });
+    await startTUI({
+      runner,
+      model,
+      providerName,
+      setPermissionCallback: (cb) => {
+        permissionRef.current = cb;
+      },
+    });
   });
 
 program.parseAsync(process.argv).catch((err: Error) => {

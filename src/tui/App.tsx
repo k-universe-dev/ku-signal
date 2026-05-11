@@ -1,5 +1,5 @@
 // src/tui/App.tsx
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Box, useApp } from "ink";
 import Header from "./Header.js";
 import { SidePanel } from "./SidePanel.js";
@@ -8,20 +8,53 @@ import SlashInput from "./SlashInput.js";
 import { parseSlashCommand } from "./commands.js";
 import { allTools } from "../tools/index.js";
 import type { Runner } from "../core/runner.js";
+import { PermissionGate } from "./PermissionGate.js";
+import { addAlwaysPermission } from "../permissions.js";
+import type { PermissionDecision, RequestPermission } from "../permissions.js";
+import { loadConfig, saveConfig } from "../config.js";
 
 interface AppProps {
   runner: Runner;
   model: string;
   providerName: string;
+  setPermissionCallback?: (cb: RequestPermission) => void;
 }
 
 const TOOL_NAMES = allTools.map((t) => t.definition.name);
 
-export function App({ runner, model, providerName }: AppProps): React.ReactElement {
+export function App({ runner, model, providerName, setPermissionCallback }: AppProps): React.ReactElement {
   const { exit } = useApp();
   const [messages, setMessages] = useState<TUIMessage[]>([]);
   const [loading, setLoading] = useState(false);
   const [currentModel, setCurrentModel] = useState(model);
+
+  const [permissionRequest, setPermissionRequest] = useState<{
+    tool: string;
+    summary: string;
+    resolve: (d: PermissionDecision) => void;
+  } | null>(null);
+
+  useEffect(() => {
+    if (!setPermissionCallback) return;
+    setPermissionCallback((tool, summary) =>
+      new Promise<PermissionDecision>((resolve) => {
+        setPermissionRequest({ tool, summary, resolve });
+      })
+    );
+  }, [setPermissionCallback]);
+
+  const handlePermissionDecide = useCallback(
+    (decision: PermissionDecision) => {
+      if (!permissionRequest) return;
+      if (decision === "always") {
+        const cfg = loadConfig();
+        saveConfig(addAlwaysPermission(permissionRequest.tool, cfg));
+      }
+      permissionRequest.resolve(decision);
+      setPermissionRequest(null);
+    },
+    [permissionRequest]
+  );
 
   const handleSubmit = useCallback(
     async (input: string) => {
@@ -84,15 +117,19 @@ export function App({ runner, model, providerName }: AppProps): React.ReactEleme
   return (
     <Box flexDirection="column" height="100%">
       <Header model={currentModel} provider={providerName} messageCount={messages.length} />
-      <Box flexDirection="row" flexGrow={1}>
-        <SidePanel
-          messageCount={messages.length}
-          tools={TOOL_NAMES}
-          provider={providerName}
+      {permissionRequest ? (
+        <PermissionGate
+          tool={permissionRequest.tool}
+          summary={permissionRequest.summary}
+          onDecide={handlePermissionDecide}
         />
-        <MessageList messages={messages} loading={loading} />
-      </Box>
-      <SlashInput onSubmit={handleSubmit} disabled={loading} />
+      ) : (
+        <Box flexDirection="row" flexGrow={1}>
+          <SidePanel messageCount={messages.length} tools={TOOL_NAMES} provider={providerName} />
+          <MessageList messages={messages} loading={loading} />
+        </Box>
+      )}
+      <SlashInput onSubmit={handleSubmit} disabled={loading || !!permissionRequest} />
     </Box>
   );
 }
