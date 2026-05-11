@@ -3,6 +3,9 @@ import type { ByteTool } from "./tools/index.js";
 
 export type PermissionDecision = "yes" | "no" | "always";
 export type RequestPermission = (tool: string, summary: string) => Promise<PermissionDecision>;
+type PermissionConfigSource =
+  | Pick<ByteConfig, "permissions">
+  | (() => Pick<ByteConfig, "permissions">);
 
 export function isAlwaysAllowed(tool: string, cfg: Pick<ByteConfig, "permissions">): boolean {
   return cfg.permissions.some((p) => p.tool === tool && p.decision === "always");
@@ -38,14 +41,19 @@ const GUARDED_TOOLS = new Set(["file_write", "bash"]);
 export function wrapWithPermission(
   tools: ByteTool[],
   requestPermission: RequestPermission,
-  cfg: Pick<ByteConfig, "permissions">
+  cfgSource: PermissionConfigSource
 ): ByteTool[] {
+  const getCfg =
+    typeof cfgSource === "function"
+      ? cfgSource
+      : (): Pick<ByteConfig, "permissions"> => cfgSource;
+
   return tools.map((tool) => {
     if (!GUARDED_TOOLS.has(tool.definition.name)) return tool;
     return {
       ...tool,
       async execute(args: Record<string, unknown>): Promise<string> {
-        if (isAlwaysAllowed(tool.definition.name, cfg)) {
+        if (isAlwaysAllowed(tool.definition.name, getCfg())) {
           return tool.execute(args);
         }
         const summary = summarizeTool(tool.definition.name, args);

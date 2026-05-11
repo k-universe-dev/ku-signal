@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import { loadConfig, setApiKey, setBaseUrl, addCustomProvider } from "./config.js";
+import { loadConfig, saveConfig, setApiKey, setBaseUrl, addCustomProvider } from "./config.js";
 import { createAnthropicProvider } from "./providers/anthropic/index.js";
 import { createOpenAIProvider } from "./providers/openai/index.js";
 import { createRunner } from "./core/runner.js";
@@ -9,7 +9,7 @@ import { loadRepoContext } from "./context.js";
 import { runByteInit } from "./init.js";
 import { ProviderRegistry } from "./providers/registry.js";
 import { createOpenAICompatProvider } from "./providers/openai-compat/index.js";
-import { wrapWithPermission } from "./permissions.js";
+import { addAlwaysPermission, wrapWithPermission } from "./permissions.js";
 import type { RequestPermission } from "./permissions.js";
 
 function buildRegistry(cfg: ReturnType<typeof loadConfig>): ProviderRegistry {
@@ -57,7 +57,7 @@ const program = new Command();
 program
   .name("ku-signal")
   .description("KU-Signal — K-Universe agent coordination engine")
-  .version("0.1.0");
+  .version("0.1.3");
 
 program
   .command("config")
@@ -119,7 +119,8 @@ program
   .option("-p, --print", "Print mode: output raw text, no TUI")
   .option("--provider <provider>", "Provider: anthropic | openai | lmstudio")
   .action(async (prompt: string | undefined, opts: { model?: string; print?: boolean; provider?: string }) => {
-    const cfg = loadConfig();
+    const cfgRef: { current: ReturnType<typeof loadConfig> } = { current: loadConfig() };
+    const cfg = cfgRef.current;
     const model = opts.model ?? cfg.defaultModel;
     const providerName = opts.provider ?? cfg.defaultProvider;
 
@@ -130,11 +131,17 @@ program
     const permissionRef: { current: RequestPermission } = {
       current: async () => "yes",
     };
-    const requestPermission: RequestPermission = (tool, summary) =>
-      permissionRef.current(tool, summary);
+    const requestPermission: RequestPermission = async (tool, summary) => {
+      const decision = await permissionRef.current(tool, summary);
+      if (decision === "always") {
+        cfgRef.current = addAlwaysPermission(tool, cfgRef.current);
+        saveConfig(cfgRef.current);
+      }
+      return decision;
+    };
 
     // Wrap destructive tools (file_write, bash) with permission gate
-    const guardedTools = wrapWithPermission(allTools, requestPermission, cfg);
+    const guardedTools = wrapWithPermission(allTools, requestPermission, () => cfgRef.current);
 
     const runnerTools: RunnerTool[] = guardedTools.map((t) => ({
       name: t.definition.name,

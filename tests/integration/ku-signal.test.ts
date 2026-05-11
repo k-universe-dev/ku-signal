@@ -1,12 +1,15 @@
 import { describe, it, expect } from "vitest";
 import { execa } from "execa";
+import { readFileSync } from "node:fs";
+
+const packageVersion = JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")).version;
 
 describe("ku-signal CLI integration", () => {
-  it("--version prints 0.1.0", async () => {
+  it("prints the current package version", async () => {
     const result = await execa("npx", ["tsx", "src/cli.ts", "--version"], {
       cwd: process.cwd(),
     });
-    expect(result.stdout.trim()).toBe("0.1.0");
+    expect(result.stdout.trim()).toBe(packageVersion);
   });
 
   it("--help prints KU-Signal description", async () => {

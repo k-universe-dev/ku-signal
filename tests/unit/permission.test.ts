@@ -78,6 +78,13 @@ describe("wrapWithPermission", () => {
     await expect(wrapped[0].execute({ command: "rm -rf /" })).rejects.toThrow("Permission denied for bash");
   });
 
+  it("guarded tool executes when requestPermission returns 'always'", async () => {
+    const tools = [fakeTool("file_write")];
+    const wrapped = wrapWithPermission(tools, async () => "always", { ...defaultConfig(), permissions: [] });
+    const result = await wrapped[0].execute({ path: "x.txt", content: "hi" });
+    expect(result).toBe("file_write-result");
+  });
+
   it("guarded tool skips requestPermission when tool is always-allowed", async () => {
     let called = false;
     const tools = [fakeTool("file_write")];
@@ -85,5 +92,25 @@ describe("wrapWithPermission", () => {
     const wrapped = wrapWithPermission(tools, async () => { called = true; return "yes"; }, cfg);
     await wrapped[0].execute({ path: "x.txt", content: "hi" });
     expect(called).toBe(false);
+  });
+
+  it("re-reads permissions from config source between executions", async () => {
+    let calls = 0;
+    let cfg = { ...defaultConfig(), permissions: [] as { tool: string; decision: "always" }[] };
+    const tools = [fakeTool("file_write")];
+    const wrapped = wrapWithPermission(
+      tools,
+      async () => {
+        calls += 1;
+        return "yes";
+      },
+      () => cfg
+    );
+
+    await wrapped[0].execute({ path: "x.txt", content: "first" });
+    cfg = addAlwaysPermission("file_write", cfg);
+    await wrapped[0].execute({ path: "x.txt", content: "second" });
+
+    expect(calls).toBe(1);
   });
 });

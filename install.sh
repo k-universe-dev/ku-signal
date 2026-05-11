@@ -32,16 +32,14 @@ if [ "$VERSION" = "latest" ]; then
   VERSION="$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | grep '"tag_name"' | sed 's/.*"tag_name": "v\([^"]*\)".*/\1/')"
 fi
 
-ARCHIVE_NAME="${BINARY}_${VERSION}_${OS}_${ARCH}.tar.gz"
-URL="https://github.com/${REPO}/releases/download/v${VERSION}/${ARCHIVE_NAME}"
+ASSET_NAME="${BINARY}_${OS}_${ARCH}"
 
 echo "Installing ku-signal v${VERSION} (${OS}/${ARCH})..."
 
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
-curl -fsSL "$URL" -o "$TMP/${ARCHIVE_NAME}"
-tar -xzf "$TMP/${ARCHIVE_NAME}" -C "$TMP"
+curl -fsSL "https://github.com/${REPO}/releases/download/v${VERSION}/${ASSET_NAME}" -o "$TMP/${BINARY}"
 
 # Install — use sudo if needed
 if [ -w "$INSTALL_DIR" ]; then

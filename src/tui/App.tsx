@@ -9,9 +9,7 @@ import { parseSlashCommand } from "./commands.js";
 import { allTools } from "../tools/index.js";
 import type { Runner } from "../core/runner.js";
 import { PermissionGate } from "./PermissionGate.js";
-import { addAlwaysPermission } from "../permissions.js";
 import type { PermissionDecision, RequestPermission } from "../permissions.js";
-import { loadConfig, saveConfig } from "../config.js";
 
 interface AppProps {
   runner: Runner;
@@ -46,10 +44,6 @@ export function App({ runner, model, providerName, setPermissionCallback }: AppP
   const handlePermissionDecide = useCallback(
     (decision: PermissionDecision) => {
       if (!permissionRequest) return;
-      if (decision === "always") {
-        const cfg = loadConfig();
-        saveConfig(addAlwaysPermission(permissionRequest.tool, cfg));
-      }
       permissionRequest.resolve(decision);
       setPermissionRequest(null);
     },
