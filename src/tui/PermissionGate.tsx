@@ -8,7 +8,7 @@ interface PermissionGateProps {
   onDecide: (decision: PermissionDecision) => void;
 }
 
-export default function PermissionGate({ tool, summary, onDecide }: PermissionGateProps): React.ReactElement {
+export function PermissionGate({ tool, summary, onDecide }: PermissionGateProps): React.ReactElement {
   useInput((char) => {
     const c = char.toLowerCase();
     if (c === "y") onDecide("yes");
