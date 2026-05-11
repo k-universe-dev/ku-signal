@@ -1,6 +1,14 @@
 import Conf from "conf";
 import { z } from "zod";
 
+const PermissionEntrySchema = z.object({
+  tool: z.string().min(1),
+  decision: z.literal("always"),
+});
+
+export { PermissionEntrySchema };
+export type PermissionEntry = z.infer<typeof PermissionEntrySchema>;
+
 export const ByteConfigSchema = z.object({
   defaultModel: z.string().min(1),
   defaultProvider: z.string().min(1),
@@ -30,6 +38,7 @@ export const ByteConfigSchema = z.object({
       path: z.string().optional(),
     })
   ).default([]),
+  permissions: z.array(PermissionEntrySchema).default([]),
 });
 
 export type ByteConfig = z.infer<typeof ByteConfigSchema>;
@@ -42,6 +51,7 @@ export function defaultConfig(): ByteConfig {
     customProviders: [],
     theme: { accentColor: "#0066FF" },
     extensions: [],
+    permissions: [],
   };
 }
 
