@@ -31,3 +31,31 @@ export function summarizeTool(toolName: string, args: Record<string, unknown>): 
   }
   return toolName;
 }
+
+import type { ByteTool } from "./tools/index.js";
+
+const GUARDED_TOOLS = new Set(["file_write", "bash"]);
+
+export function wrapWithPermission(
+  tools: ByteTool[],
+  requestPermission: RequestPermission,
+  cfg: Pick<ByteConfig, "permissions">
+): ByteTool[] {
+  return tools.map((tool) => {
+    if (!GUARDED_TOOLS.has(tool.definition.name)) return tool;
+    return {
+      ...tool,
+      async execute(args: Record<string, unknown>): Promise<string> {
+        if (isAlwaysAllowed(tool.definition.name, cfg)) {
+          return tool.execute(args);
+        }
+        const summary = summarizeTool(tool.definition.name, args);
+        const decision = await requestPermission(tool.definition.name, summary);
+        if (decision === "no") {
+          throw new Error(`Permission denied for ${tool.definition.name}`);
+        }
+        return tool.execute(args);
+      },
+    };
+  });
+}

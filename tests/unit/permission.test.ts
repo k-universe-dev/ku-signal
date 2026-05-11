@@ -41,3 +41,51 @@ describe("permission config", () => {
     expect(again.permissions).toHaveLength(1);
   });
 });
+
+import { wrapWithPermission } from "../../src/permissions.js";
+import type { ByteTool } from "../../src/tools/index.js";
+
+describe("wrapWithPermission", () => {
+  const fakeTool = (name: string): ByteTool => ({
+    definition: { name, description: name, parameters: { type: "object", properties: {}, required: [] } },
+    execute: async () => `${name}-result`,
+  });
+
+  it("returns same number of tools", () => {
+    const tools = [fakeTool("file_read"), fakeTool("file_write"), fakeTool("bash")];
+    const wrapped = wrapWithPermission(tools, async () => "yes", { ...defaultConfig(), permissions: [] });
+    expect(wrapped).toHaveLength(3);
+  });
+
+  it("non-guarded tools execute without calling requestPermission", async () => {
+    let called = false;
+    const tools = [fakeTool("file_read")];
+    const wrapped = wrapWithPermission(tools, async () => { called = true; return "yes"; }, { ...defaultConfig(), permissions: [] });
+    await wrapped[0].execute({});
+    expect(called).toBe(false);
+  });
+
+  it("guarded tool calls requestPermission before executing", async () => {
+    let called = false;
+    const tools = [fakeTool("file_write")];
+    const wrapped = wrapWithPermission(tools, async () => { called = true; return "yes"; }, { ...defaultConfig(), permissions: [] });
+    const result = await wrapped[0].execute({ path: "x.txt", content: "hi" });
+    expect(called).toBe(true);
+    expect(result).toBe("file_write-result");
+  });
+
+  it("guarded tool throws when requestPermission returns 'no'", async () => {
+    const tools = [fakeTool("bash")];
+    const wrapped = wrapWithPermission(tools, async () => "no", { ...defaultConfig(), permissions: [] });
+    await expect(wrapped[0].execute({ command: "rm -rf /" })).rejects.toThrow("Permission denied");
+  });
+
+  it("guarded tool skips requestPermission when tool is always-allowed", async () => {
+    let called = false;
+    const tools = [fakeTool("file_write")];
+    const cfg = { ...defaultConfig(), permissions: [{ tool: "file_write", decision: "always" as const }] };
+    const wrapped = wrapWithPermission(tools, async () => { called = true; return "yes"; }, cfg);
+    await wrapped[0].execute({ path: "x.txt", content: "hi" });
+    expect(called).toBe(false);
+  });
+});
