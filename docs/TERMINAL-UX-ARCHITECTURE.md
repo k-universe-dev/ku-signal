@@ -7,7 +7,7 @@
 ## 1. Directory Map & Project Structure
 
 ```
-k-universe-agent-harness/
+ku-signal/
 ├── src/
 │   ├── protocol/                 # K-Wire protocol layer (Zod schemas)
 │   │   ├── state.ts             # SessionState, SessionId (branded), job status enums
