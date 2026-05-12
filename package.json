@@ -18,6 +18,10 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/cli.ts",
+    "demo": "tsx demo/index.tsx",
+    "demo:compact": "tsx demo/index.tsx --mode=compact",
+    "demo:reasoning": "tsx demo/index.tsx --mode=reasoning",
+    "demo:debug": "tsx demo/index.tsx --mode=debug",
     "verify": "tsx scripts/verify.ts",
     "test": "vitest run",
     "test:watch": "vitest",
