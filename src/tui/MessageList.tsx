@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Text } from "ink";
+import { Box, Text, Static } from "ink";
 
 export interface TUIMessage {
   role: "user" | "assistant";
@@ -43,6 +43,18 @@ function AssistantMessage({ content, animate }: AssistantMessageProps): React.Re
   );
 }
 
+function MessageItem({ msg, animate }: { msg: TUIMessage; animate: boolean }): React.ReactElement {
+  if (msg.role === "user") {
+    return (
+      <Box flexDirection="column" marginBottom={1}>
+        <Text color="cyan" bold>you</Text>
+        <Text wrap="wrap">{msg.content}</Text>
+      </Box>
+    );
+  }
+  return <AssistantMessage content={msg.content} animate={animate} />;
+}
+
 interface MessageListProps {
   messages: TUIMessage[];
   loading: boolean;
@@ -57,28 +69,19 @@ export function MessageList({ messages, loading }: MessageListProps): React.Reac
     );
   }
 
+  const lastMsg = messages[messages.length - 1];
+  // Last assistant message animates only when we're not already loading the next one
+  const lastIsAnimating = !loading && lastMsg.role === "assistant";
+
+  // Completed messages → Static (flushed to scrollback, never re-rendered)
+  const staticMessages = lastIsAnimating ? messages.slice(0, -1) : messages;
+
   return (
-    <Box flexDirection="column" flexGrow={1} paddingX={1} paddingTop={1}>
-      {messages.map((msg, i) => {
-        const isLastAssistant = msg.role === "assistant" && i === messages.length - 1;
-
-        if (msg.role === "user") {
-          return (
-            <Box key={i} flexDirection="column" marginBottom={1}>
-              <Text color="cyan" bold>you</Text>
-              <Text wrap="wrap">{msg.content}</Text>
-            </Box>
-          );
-        }
-
-        return (
-          <AssistantMessage
-            key={i}
-            content={msg.content}
-            animate={isLastAssistant && !loading}
-          />
-        );
-      })}
+    <Box flexDirection="column" flexGrow={1} paddingX={1} paddingTop={1} overflow="hidden">
+      <Static items={staticMessages}>
+        {(msg, i) => <MessageItem key={i} msg={msg} animate={false} />}
+      </Static>
+      {lastIsAnimating && <MessageItem msg={lastMsg} animate={true} />}
       {loading && (
         <Box>
           <Text color="yellow" dimColor>ku-signal is thinking...</Text>

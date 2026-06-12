@@ -1,6 +1,6 @@
 // src/tui/App.tsx
 import React, { useState, useCallback, useEffect } from "react";
-import { Box, useApp } from "ink";
+import { Box, useApp, useStdout } from "ink";
 import Header from "./Header.js";
 import { SidePanel } from "./SidePanel.js";
 import { MessageList, type TUIMessage } from "./MessageList.js";
@@ -22,6 +22,9 @@ const TOOL_NAMES = allTools.map((t) => t.definition.name);
 
 export function App({ runner, model, providerName, setPermissionCallback }: AppProps): React.ReactElement {
   const { exit } = useApp();
+  const { stdout } = useStdout();
+  // rows - 1: safety margin for Windows Terminal off-by-one clipping
+  const termRows = Math.max((stdout.rows || 24) - 1, 10);
   const [messages, setMessages] = useState<TUIMessage[]>([]);
   const [loading, setLoading] = useState(false);
   const [currentModel, setCurrentModel] = useState(model);
@@ -109,7 +112,7 @@ export function App({ runner, model, providerName, setPermissionCallback }: AppP
   );
 
   return (
-    <Box flexDirection="column" height="100%">
+    <Box flexDirection="column" height={termRows}>
       <Header model={currentModel} provider={providerName} messageCount={messages.length} />
       {permissionRequest ? (
         <PermissionGate
@@ -118,7 +121,7 @@ export function App({ runner, model, providerName, setPermissionCallback }: AppP
           onDecide={handlePermissionDecide}
         />
       ) : (
-        <Box flexDirection="row" flexGrow={1}>
+        <Box flexDirection="row" flexGrow={1} overflow="hidden">
           <SidePanel messageCount={messages.length} tools={TOOL_NAMES} provider={providerName} />
           <MessageList messages={messages} loading={loading} />
         </Box>

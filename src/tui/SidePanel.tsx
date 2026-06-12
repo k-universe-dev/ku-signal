@@ -17,6 +17,7 @@ export function SidePanel({ messageCount, tools, provider }: SidePanelProps): Re
       borderStyle="single"
       paddingX={1}
       flexShrink={0}
+      overflow="hidden"
     >
       <Text bold color="blueBright">SESSION</Text>
       <Text dimColor>{"─".repeat(12)}</Text>
