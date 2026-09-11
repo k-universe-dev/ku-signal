@@ -62,10 +62,14 @@ jobs:
           name: ku-signal-binaries
           path: dist/bins
 
-      - name: Smoke test linux amd64 binary
+      - name: Smoke test linux amd64 binary (musl → Alpine)
         run: |
           chmod +x dist/bins/ku-signal_linux_amd64
-          bun run scripts/smoke-binary.ts ./dist/bins/ku-signal_linux_amd64
+          EXPECTED="$(bun --print "JSON.parse(await Bun.file('package.json').text()).version")"
+          # The binary is linked against musl, so run it in its target environment
+          # instead of on the glibc runner (where /lib/ld-musl-x86_64.so.1 is absent).
+          ACTUAL="$(docker run --rm -v "$PWD/dist/bins:/bins" -w /bins alpine:3.20 ./ku-signal_linux_amd64 --version)"
+          test "$ACTUAL" = "$EXPECTED"
 
   validate-linux-arm64:
     name: validate-linux-arm64
@@ -87,16 +91,14 @@ jobs:
           name: ku-signal-binaries
           path: dist/bins
 
-      - name: Install QEMU
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y qemu-user-static
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
-      - name: Smoke test linux arm64 binary
+      - name: Smoke test linux arm64 binary (musl → Alpine/arm64)
         run: |
           chmod +x dist/bins/ku-signal_linux_arm64
           EXPECTED="$(bun --print "JSON.parse(await Bun.file('package.json').text()).version")"
-          ACTUAL="$(qemu-aarch64-static ./dist/bins/ku-signal_linux_arm64 --version)"
+          ACTUAL="$(docker run --rm --platform linux/arm64 -v "$PWD/dist/bins:/bins" -w /bins alpine:3.20 ./ku-signal_linux_arm64 --version)"
           test "$ACTUAL" = "$EXPECTED"
 
   validate-windows-amd64:
@@ -124,7 +126,7 @@ jobs:
 
   validate-darwin-amd64:
     name: validate-darwin-amd64
-    runs-on: macos-13
+    runs-on: macos-15-intel
     needs: build-binaries
 
     steps:
