@@ -68,7 +68,7 @@ jobs:
           EXPECTED="$(bun --print "JSON.parse(await Bun.file('package.json').text()).version")"
           # The binary is linked against musl, so run it in its target environment
           # instead of on the glibc runner (where /lib/ld-musl-x86_64.so.1 is absent).
-          ACTUAL="$(docker run --rm -v "$PWD/dist/bins:/bins" -w /bins alpine:3.20 ./ku-signal_linux_amd64 --version)"
+          ACTUAL="$(docker run --rm -v "$PWD/dist/bins:/bins" -w /bins alpine:3.20 sh -c 'apk add --no-cache libstdc++ >/dev/null && ./ku-signal_linux_amd64 --version')"
           test "$ACTUAL" = "$EXPECTED"
 
   validate-linux-arm64:
@@ -98,7 +98,7 @@ jobs:
         run: |
           chmod +x dist/bins/ku-signal_linux_arm64
           EXPECTED="$(bun --print "JSON.parse(await Bun.file('package.json').text()).version")"
-          ACTUAL="$(docker run --rm --platform linux/arm64 -v "$PWD/dist/bins:/bins" -w /bins alpine:3.20 ./ku-signal_linux_arm64 --version)"
+          ACTUAL="$(docker run --rm --platform linux/arm64 -v "$PWD/dist/bins:/bins" -w /bins alpine:3.20 sh -c 'apk add --no-cache libstdc++ >/dev/null && ./ku-signal_linux_arm64 --version')"
           test "$ACTUAL" = "$EXPECTED"
 
   validate-windows-amd64:
